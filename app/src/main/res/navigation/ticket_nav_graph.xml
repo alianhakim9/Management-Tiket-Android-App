@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ticket_nav_graph"
+    app:startDestination="@id/ticketDashboardFragment">
+
+    <fragment
+        android:id="@+id/ticketDashboardFragment"
+        android:name="id.alian.managementtiket.presentation.tickets.fragments.TicketDashboardFragment"
+        android:label="fragment_ticket_dashboard"
+        tools:layout="@layout/fragment_ticket_dashboard" >
+        <action
+            android:id="@+id/action_ticketDashboardFragment_to_ticketListFragment"
+            app:destination="@id/ticketListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketListFragment"
+        android:name="id.alian.managementtiket.presentation.tickets.fragments.ListTicketFragment"
+        android:label="fragment_ticket_list"
+        tools:layout="@layout/fragment_list_ticket" />
+</navigation>

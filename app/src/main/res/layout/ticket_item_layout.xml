@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_ticket_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From : 2020-04-15 16:26:20"
+            app:layout_constraintBottom_toTopOf="@+id/tv_ticket_to"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ticket_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:text="To : 0521-06-24 02:34:49"
+            app:layout_constraintBottom_toTopOf="@+id/tv_ticket_time"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ticket_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time : 01:36:43"
+            app:layout_constraintBottom_toTopOf="@+id/tv_ticket_price"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ticket_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price : $ 5051"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_ticket_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stok : 265"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
