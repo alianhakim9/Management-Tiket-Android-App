@@ -6,8 +6,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import id.alian.managementtiket.commons.Constants.BASE_URL
 import id.alian.managementtiket.data.remote.TicketApi
+import id.alian.managementtiket.data.repository.OrderRepositoryImpl
+import id.alian.managementtiket.data.repository.PaymentRepositoryImpl
 import id.alian.managementtiket.data.repository.TicketRepositoryImpl
 import id.alian.managementtiket.data.repository.UserRepositoryImpl
+import id.alian.managementtiket.domain.repository.OrderRepository
+import id.alian.managementtiket.domain.repository.PaymentRepository
 import id.alian.managementtiket.domain.repository.TicketRepository
 import id.alian.managementtiket.domain.repository.UserRepository
 import retrofit2.Retrofit
@@ -38,6 +42,18 @@ object AppModule {
     @Singleton
     fun providesTicketRepository(api: TicketApi): TicketRepository {
         return TicketRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun providesOrderRepository(api: TicketApi): OrderRepository {
+        return OrderRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun providesPaymentRepository(api: TicketApi): PaymentRepository {
+        return PaymentRepositoryImpl(api)
     }
 
 }

@@ -16,13 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".presentation.tickets.activities.TicketActivity"
+            android:name=".presentation.payment.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.users.activities.UserActivity"
+            android:name=".presentation.orders.OrderActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.auth.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.tickets.TicketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.users.UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

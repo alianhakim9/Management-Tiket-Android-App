@@ -1,4 +1,4 @@
-package id.alian.managementtiket.presentation.tickets.activities
+package id.alian.managementtiket.presentation.tickets
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

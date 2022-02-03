@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.tickets.TicketActivity">
+    tools:context=".presentation.orders.OrderActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/ticketFragmentContainer"
+        android:id="@+id/orderFragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,5 +17,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/ticket_nav_graph" />
+        app:navGraph="@navigation/order_nav_graph" />
 </androidx.constraintlayout.widget.ConstraintLayout>
