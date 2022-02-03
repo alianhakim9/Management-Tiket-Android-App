@@ -32,7 +32,17 @@ class ListTicketFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListTicketBinding.inflate(inflater, container, false)
-        setupRecyclerView()
+
+        requireActivity().runOnUiThread {
+            setupRecyclerView()
+            ticketAdapter.setOnItemClickListener {
+                findNavController().navigate(
+                    ListTicketFragmentDirections.actionTicketListFragmentToDetailTicketFragment(
+                        it
+                    )
+                )
+            }
+        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.ticketListState.collect {
@@ -57,13 +67,6 @@ class ListTicketFragment : Fragment() {
             }
         }
 
-        ticketAdapter.setOnItemClickListener {
-            findNavController().navigate(
-                ListTicketFragmentDirections.actionTicketListFragmentToDetailTicketFragment(
-                    it
-                )
-            )
-        }
 
         return binding.root
     }

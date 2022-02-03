@@ -20,8 +20,10 @@ class UserDashboardFragment : Fragment() {
     ): View {
         _binding = FragmentUserDashboardBinding.inflate(inflater, container, false)
 
-        binding.cvListUser.setOnClickListener {
-            findNavController().navigate(R.id.action_userDashboardFragment_to_listUserFragment)
+        requireActivity().runOnUiThread {
+            binding.cvListUser.setOnClickListener {
+                findNavController().navigate(R.id.action_userDashboardFragment_to_listUserFragment)
+            }
         }
 
         return binding.root

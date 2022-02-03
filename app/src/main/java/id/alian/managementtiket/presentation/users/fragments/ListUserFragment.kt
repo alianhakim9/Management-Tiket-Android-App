@@ -30,26 +30,26 @@ class ListUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListUserBinding.inflate(inflater, container, false)
+        requireActivity().runOnUiThread {
+            setupRecyclerView()
+            lifecycleScope.launchWhenStarted {
+                viewModel.userListState.collect {
+                    when (it) {
+                        is UserListState.Success -> {
+                            hideLoading()
+                            userAdapter.differ.submitList(it.data)
+                        }
 
-        setupRecyclerView()
+                        is UserListState.Loading -> {
+                            showLoading()
+                        }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.userListState.collect {
-                when (it) {
-                    is UserListState.Success -> {
-                        hideLoading()
-                        userAdapter.differ.submitList(it.data)
+                        is UserListState.Error -> {
+                            hideLoading()
+                            Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+                        }
+                        else -> UserListState.Empty
                     }
-
-                    is UserListState.Loading -> {
-                        showLoading()
-                    }
-
-                    is UserListState.Error -> {
-                        hideLoading()
-                        Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
-                    }
-                    else -> UserListState.Empty
                 }
             }
         }
