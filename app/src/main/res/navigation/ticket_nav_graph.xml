@@ -9,7 +9,7 @@
         android:id="@+id/ticketDashboardFragment"
         android:name="id.alian.managementtiket.presentation.tickets.fragments.TicketDashboardFragment"
         android:label="fragment_ticket_dashboard"
-        tools:layout="@layout/fragment_ticket_dashboard" >
+        tools:layout="@layout/fragment_ticket_dashboard">
         <action
             android:id="@+id/action_ticketDashboardFragment_to_ticketListFragment"
             app:destination="@id/ticketListFragment" />
@@ -18,5 +18,20 @@
         android:id="@+id/ticketListFragment"
         android:name="id.alian.managementtiket.presentation.tickets.fragments.ListTicketFragment"
         android:label="fragment_ticket_list"
-        tools:layout="@layout/fragment_list_ticket" />
+        tools:layout="@layout/fragment_list_ticket">
+        <action
+            android:id="@+id/action_ticketListFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTicketFragment"
+        android:name="id.alian.managementtiket.presentation.tickets.fragments.DetailTicketFragment"
+        android:label="fragment_detail_ticket"
+        tools:layout="@layout/fragment_detail_ticket">
+        <argument
+            android:name="ticket_detail"
+            app:argType="id.alian.managementtiket.domain.model.Ticket"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

@@ -11,6 +11,7 @@
         android:id="@+id/cv_user"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -43,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cv_user"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cv_user">
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,7 @@ import id.alian.managementtiket.presentation.tickets.state.TicketListState
 import id.alian.managementtiket.presentation.tickets.viewmodel.TicketViewModel
 import id.alian.managementtiket.presentation.users.state.UserListState
 import kotlinx.coroutines.flow.collect
+
 
 @AndroidEntryPoint
 class ListTicketFragment : Fragment() {
@@ -32,26 +34,35 @@ class ListTicketFragment : Fragment() {
         _binding = FragmentListTicketBinding.inflate(inflater, container, false)
         setupRecyclerView()
 
-
         lifecycleScope.launchWhenStarted {
             viewModel.ticketListState.collect {
-                when (it) {
-                    is TicketListState.Success -> {
-                        hideLoading()
-                        ticketAdapter.differ.submitList(it.data)
-                    }
+                requireActivity().runOnUiThread {
+                    when (it) {
+                        is TicketListState.Success -> {
+                            hideLoading()
+                            ticketAdapter.differ.submitList(it.data)
+                        }
 
-                    is TicketListState.Loading -> {
-                        showLoading()
-                    }
+                        is TicketListState.Loading -> {
+                            showLoading()
+                        }
 
-                    is TicketListState.Error -> {
-                        hideLoading()
-                        Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+                        is TicketListState.Error -> {
+                            hideLoading()
+                            Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+                        }
+                        else -> UserListState.Empty
                     }
-                    else -> UserListState.Empty
                 }
             }
+        }
+
+        ticketAdapter.setOnItemClickListener {
+            findNavController().navigate(
+                ListTicketFragmentDirections.actionTicketListFragmentToDetailTicketFragment(
+                    it
+                )
+            )
         }
 
         return binding.root
