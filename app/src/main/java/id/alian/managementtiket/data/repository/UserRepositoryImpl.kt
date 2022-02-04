@@ -11,4 +11,8 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getUsers(): List<UserDto> {
         return api.getUsers()
     }
+
+    override suspend fun getProfile(token: String): UserDto {
+        return api.getProfile("Bearer $token")
+    }
 }

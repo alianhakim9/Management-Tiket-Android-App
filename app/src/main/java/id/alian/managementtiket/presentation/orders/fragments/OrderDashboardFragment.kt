@@ -1,70 +1,57 @@
 package id.alian.managementtiket.presentation.orders.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import id.alian.managementtiket.R
+import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentOrderDashboardBinding
 import id.alian.managementtiket.presentation.orders.adapter.OrderAdapter
-import id.alian.managementtiket.presentation.orders.state.OrderListState
 import id.alian.managementtiket.presentation.orders.viewmodel.OrderViewModel
 import id.alian.managementtiket.presentation.users.state.UserListState
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class OrderDashboardFragment : Fragment() {
+class OrderDashboardFragment :
+    BaseFragment<FragmentOrderDashboardBinding>(FragmentOrderDashboardBinding::inflate) {
 
     private val orderAdapter by lazy { OrderAdapter() }
     private val viewModel: OrderViewModel by viewModels()
 
-    private var _binding: FragmentOrderDashboardBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentOrderDashboardBinding.inflate(inflater, container, false)
-
+    override fun FragmentOrderDashboardBinding.initialize() {
         requireActivity().runOnUiThread {
             setupRecyclerView()
-
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
         lifecycleScope.launchWhenStarted {
             viewModel.orderListState.collect {
                 requireActivity().runOnUiThread {
                     when (it) {
-                        is OrderListState.Success -> {
+                        is Resource.Success -> {
                             hideLoading()
                             orderAdapter.differ.submitList(it.data)
                         }
 
-                        is OrderListState.Loading -> {
+                        is Resource.Loading -> {
                             showLoading()
                         }
 
-                        is OrderListState.Error -> {
+                        is Resource.Error -> {
                             hideLoading()
-                            Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+                            binding.root.showShortSnackBar(
+                                message = it.message!!,
+                                colorHex = requireContext().getColorCompat(R.color.error_red)
+                            )
                         }
                         else -> UserListState.Empty
                     }
                 }
             }
         }
-
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setupRecyclerView() {
@@ -72,15 +59,13 @@ class OrderDashboardFragment : Fragment() {
         binding.rvOrderList.layoutManager = LinearLayoutManager(requireContext())
     }
 
-
     private fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-        binding.rvOrderList.visibility = View.VISIBLE
+        binding.progressBar.hide()
+        binding.rvOrderList.show()
     }
 
     private fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.rvOrderList.visibility = View.GONE
+        binding.progressBar.show()
+        binding.rvOrderList.hide()
     }
-
 }

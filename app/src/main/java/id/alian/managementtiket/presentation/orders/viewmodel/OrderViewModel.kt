@@ -1,24 +1,35 @@
 package id.alian.managementtiket.presentation.orders.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.alian.managementtiket.commons.Resource
+import id.alian.managementtiket.data.remote.dto.auth.CreateOrderDto
+import id.alian.managementtiket.domain.model.Order
+import id.alian.managementtiket.domain.use_case.orders.create_order.CreateOrderUseCase
 import id.alian.managementtiket.domain.use_case.orders.get_orders.GetOrderUseCase
-import id.alian.managementtiket.presentation.orders.state.OrderListState
-import id.alian.managementtiket.presentation.tickets.state.TicketListState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-    val getOrderUseCase: GetOrderUseCase
+    val getOrderUseCase: GetOrderUseCase,
+    val createOrderUseCase: CreateOrderUseCase,
 ) : ViewModel() {
-    private val _orderListState = MutableStateFlow<OrderListState>(OrderListState.Empty)
-    val orderListState: StateFlow<OrderListState> = _orderListState
+
+    private val _orderListState = MutableSharedFlow<Resource<List<Order>>>()
+    val orderListState: SharedFlow<Resource<List<Order>>> = _orderListState
+
+    private val _createOrderState = MutableSharedFlow<Resource<CreateOrderDto>>()
+    val createOrderState: SharedFlow<Resource<CreateOrderDto>> = _createOrderState
+
+    private var _ticketCount = MutableLiveData<Int>(0)
+    val ticketCount: LiveData<Int> = _ticketCount
 
     init {
         getOrders()
@@ -26,23 +37,28 @@ class OrderViewModel @Inject constructor(
 
     private fun getOrders() {
         getOrderUseCase().onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    if (result.data != null) {
-                        _orderListState.value = OrderListState.Success(result.data)
-                    }
-                }
-
-                is Resource.Error -> {
-                    _orderListState.value =
-                        OrderListState.Error(result.message ?: "an expected error occurred")
-                }
-
-                is Resource.Loading -> {
-                    _orderListState.value = OrderListState.Loading
-                }
-            }
+            _orderListState.emit(result)
         }.launchIn(viewModelScope)
+    }
+
+    fun createOrder(ticketId: Int, ticketCount: Int, price: Int) {
+        if (ticketCount > 0) {
+            createOrderUseCase(
+                ticketId, ticketCount, price
+            ).onEach { result ->
+                _createOrderState.emit(result)
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun decreaseCount() {
+        if (_ticketCount.value != 0) {
+            _ticketCount.value = _ticketCount.value?.minus(1)
+        }
+    }
+
+    fun increaseCount() {
+        _ticketCount.value = _ticketCount.value?.plus(1)
     }
 
 }

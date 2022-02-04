@@ -17,5 +17,13 @@
         <action
             android:id="@+id/action_userDashboardFragment_to_listUserFragment"
             app:destination="@id/listUserFragment" />
+        <action
+            android:id="@+id/action_userDashboardFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="id.alian.managementtiket.presentation.users.fragments.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

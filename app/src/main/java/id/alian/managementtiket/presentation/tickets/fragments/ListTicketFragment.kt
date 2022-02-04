@@ -1,38 +1,27 @@
 package id.alian.managementtiket.presentation.tickets.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import id.alian.managementtiket.R
+import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentListTicketBinding
 import id.alian.managementtiket.presentation.tickets.adapter.TicketAdapter
-import id.alian.managementtiket.presentation.tickets.state.TicketListState
 import id.alian.managementtiket.presentation.tickets.viewmodel.TicketViewModel
 import id.alian.managementtiket.presentation.users.state.UserListState
 import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
-class ListTicketFragment : Fragment() {
+class ListTicketFragment :
+    BaseFragment<FragmentListTicketBinding>(FragmentListTicketBinding::inflate) {
 
-    private var _binding: FragmentListTicketBinding? = null
-    private val binding get() = _binding!!
     private val ticketAdapter by lazy { TicketAdapter() }
     private val viewModel: TicketViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentListTicketBinding.inflate(inflater, container, false)
-
+    override fun FragmentListTicketBinding.initialize() {
         requireActivity().runOnUiThread {
             setupRecyclerView()
             ticketAdapter.setOnItemClickListener {
@@ -43,38 +32,37 @@ class ListTicketFragment : Fragment() {
                 )
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
         lifecycleScope.launchWhenStarted {
             viewModel.ticketListState.collect {
                 requireActivity().runOnUiThread {
                     when (it) {
-                        is TicketListState.Success -> {
+                        is Resource.Success -> {
                             hideLoading()
                             ticketAdapter.differ.submitList(it.data)
                         }
 
-                        is TicketListState.Loading -> {
+                        is Resource.Loading -> {
                             showLoading()
                         }
 
-                        is TicketListState.Error -> {
+                        is Resource.Error -> {
                             hideLoading()
-                            Snackbar.make(binding.root, it.message, Snackbar.LENGTH_SHORT).show()
+                            binding.root.showShortSnackBar(
+                                message = it.message!!,
+                                colorHex = requireContext().getColorCompat(R.color.error_red)
+                            )
                         }
-                        else -> UserListState.Empty
+                        else -> Unit
                     }
                 }
             }
         }
-
-
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     private fun setupRecyclerView() {
         binding.rvTicketList.adapter = ticketAdapter
@@ -82,12 +70,12 @@ class ListTicketFragment : Fragment() {
     }
 
     private fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-        binding.rvTicketList.visibility = View.VISIBLE
+        binding.progressBar.hide()
+        binding.rvTicketList.show()
     }
 
     private fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.rvTicketList.visibility = View.GONE
+        binding.progressBar.show()
+        binding.rvTicketList.hide()
     }
 }

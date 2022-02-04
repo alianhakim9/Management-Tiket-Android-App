@@ -61,6 +61,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_price" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Masukan jumlah tiket yang ingin dipesan"
+        app:layout_constraintBottom_toTopOf="@+id/btn_decrease"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_ticket_count_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_buy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_decrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="decrease"
+        android:src="@drawable/ic_horizontal_line"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_ticket_count_user" />
+
+    <ImageButton
+        android:id="@+id/btn_increase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="increase"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_ticket_count_user" />
+
     <Button
         android:id="@+id/btn_buy"
         android:layout_width="match_parent"

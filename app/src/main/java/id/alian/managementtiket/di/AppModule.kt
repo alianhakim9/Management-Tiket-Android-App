@@ -1,19 +1,15 @@
 package id.alian.managementtiket.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import id.alian.managementtiket.commons.Constants.BASE_URL
 import id.alian.managementtiket.data.remote.TicketApi
-import id.alian.managementtiket.data.repository.OrderRepositoryImpl
-import id.alian.managementtiket.data.repository.PaymentRepositoryImpl
-import id.alian.managementtiket.data.repository.TicketRepositoryImpl
-import id.alian.managementtiket.data.repository.UserRepositoryImpl
-import id.alian.managementtiket.domain.repository.OrderRepository
-import id.alian.managementtiket.domain.repository.PaymentRepository
-import id.alian.managementtiket.domain.repository.TicketRepository
-import id.alian.managementtiket.domain.repository.UserRepository
+import id.alian.managementtiket.data.repository.*
+import id.alian.managementtiket.domain.repository.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -56,4 +52,15 @@ object AppModule {
         return PaymentRepositoryImpl(api)
     }
 
+    @Provides
+    @Singleton
+    fun providesAuthRepository(api: TicketApi): AuthRepository {
+        return AuthRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun providesDataStoreRepository(@ApplicationContext context: Context): DataStoreRepository {
+        return DataStoreRepositoryImpl(context)
+    }
 }

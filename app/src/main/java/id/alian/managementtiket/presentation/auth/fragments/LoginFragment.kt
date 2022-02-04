@@ -1,44 +1,78 @@
 package id.alian.managementtiket.presentation.auth.fragments
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
+import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentLoginBinding
 import id.alian.managementtiket.presentation.MainActivity
+import id.alian.managementtiket.presentation.auth.viewmodel.AuthViewModel
+import kotlinx.coroutines.flow.collectLatest
 
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: AuthViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-
+    override fun FragmentLoginBinding.initialize() {
         requireActivity().runOnUiThread {
-            binding.btnLogin.setOnClickListener {
-                Intent(requireContext(), MainActivity::class.java).also {
-                    startActivity(it)
-                }
-            }
-
             binding.btnToRegister.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
-        }
 
-        return binding.root
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.login.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+
+                        is Resource.Success -> {
+                            requireActivity().openActivity(MainActivity::class.java)
+                            requireActivity().finish()
+                        }
+
+                        is Resource.Error -> {
+                            hideLoading()
+                            binding.root.showShortSnackBarWithAction(
+                                message = it.message!!,
+                                actionLabel = resources.getString(R.string.ok),
+                                block = { snackBar ->
+                                    snackBar.dismiss()
+                                },
+                                colorHex = requireContext().getColorCompat(R.color.error_red),
+                                actionLabelColor = requireContext().getColorCompat(R.color.white)
+                            )
+                        }
+                        else -> Unit
+                    }
+                }
+            }
+
+            binding.btnLogin.setOnClickListener {
+                viewModel.login(
+                    email = binding.etEmail.editText?.text.toString(),
+                    password = binding.etPassword.editText?.text.toString()
+                )
+            }
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun showLoading() {
+        binding.progressBar.show()
+        binding.btnToRegister.hide()
+        binding.btnLogin.hide()
+        binding.etEmail.disable()
+        binding.etPassword.disable()
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.hide()
+        binding.btnToRegister.show()
+        binding.btnLogin.show()
+        binding.etEmail.enable()
+        binding.etPassword.enable()
     }
 }
