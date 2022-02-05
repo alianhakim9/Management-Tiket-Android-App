@@ -2,7 +2,7 @@ package id.alian.managementtiket.presentation.tickets.fragments
 
 import androidx.navigation.fragment.findNavController
 import id.alian.managementtiket.R
-import id.alian.managementtiket.commons.BaseFragment
+import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.databinding.FragmentTicketDashboardBinding
 
 class TicketDashboardFragment :

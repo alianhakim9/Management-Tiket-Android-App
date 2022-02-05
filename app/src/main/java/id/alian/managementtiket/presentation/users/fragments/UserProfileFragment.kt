@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import id.alian.managementtiket.commons.BaseFragment
+import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.databinding.FragmentUserProfileBinding
 import id.alian.managementtiket.presentation.users.viewmodel.UserViewModel

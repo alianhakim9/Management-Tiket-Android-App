@@ -7,35 +7,14 @@
     android:padding="10dp"
     tools:context=".presentation.users.fragments.UserDashboardFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_list_user"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="20dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:layout_constraintEnd_toStartOf="@+id/cv_profile_user"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Daftar User"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_profile_user"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:cardElevation="2dp"
         android:foreground="?android:attr/selectableItemBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cv_list_user"
-        app:layout_constraintTop_toTopOf="@+id/cv_list_user">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +23,7 @@
             android:text="Profil User"
             android:textStyle="bold" />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

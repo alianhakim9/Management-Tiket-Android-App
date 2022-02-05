@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentLoginBinding
+import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.presentation.MainActivity
 import id.alian.managementtiket.presentation.auth.viewmodel.AuthViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +23,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
 
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            binding.btnLogin.setOnClickListener {
+                viewModel.login(
+                    email = binding.etEmail.editText?.text.toString(),
+                    password = binding.etPassword.editText?.text.toString()
+                )
+            }
+
+            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
                 viewModel.login.collectLatest {
                     when (it) {
                         is Resource.Loading -> {
@@ -50,29 +58,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     }
                 }
             }
-
-            binding.btnLogin.setOnClickListener {
-                viewModel.login(
-                    email = binding.etEmail.editText?.text.toString(),
-                    password = binding.etPassword.editText?.text.toString()
-                )
-            }
         }
     }
 
     private fun showLoading() {
-        binding.progressBar.show()
-        binding.btnToRegister.hide()
-        binding.btnLogin.hide()
+        binding.btnLogin.text = resources.getString(R.string.is_login_button)
         binding.etEmail.disable()
         binding.etPassword.disable()
+        binding.btnLogin.disable()
+        binding.btnToRegister.disable()
     }
 
     private fun hideLoading() {
-        binding.progressBar.hide()
-        binding.btnToRegister.show()
-        binding.btnLogin.show()
+        binding.btnLogin.text = resources.getString(R.string.text_login_button)
         binding.etEmail.enable()
         binding.etPassword.enable()
+        binding.btnLogin.enable()
+        binding.btnToRegister.enable()
     }
 }

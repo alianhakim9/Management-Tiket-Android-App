@@ -2,7 +2,7 @@ package id.alian.managementtiket.presentation.users.fragments
 
 import androidx.navigation.fragment.findNavController
 import id.alian.managementtiket.R
-import id.alian.managementtiket.commons.BaseFragment
+import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.databinding.FragmentUserDashboardBinding
 
 class UserDashboardFragment :
@@ -10,10 +10,6 @@ class UserDashboardFragment :
 
     override fun FragmentUserDashboardBinding.initialize() {
         requireActivity().runOnUiThread {
-            binding.cvListUser.setOnClickListener {
-                findNavController().navigate(R.id.action_userDashboardFragment_to_listUserFragment)
-            }
-
             binding.cvProfileUser.setOnClickListener {
                 findNavController().navigate(R.id.action_userDashboardFragment_to_userProfileFragment)
             }

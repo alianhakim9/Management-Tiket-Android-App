@@ -1,4 +1,4 @@
-package id.alian.managementtiket.commons
+package id.alian.managementtiket.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +23,6 @@ open class BaseFragment<T : ViewBinding>(
     ): View? {
         _binding = inflateMethod.invoke(inflater, container, false)
 
-        // Calling the extension function
         binding.initialize()
 
         return binding.root
@@ -33,6 +32,4 @@ open class BaseFragment<T : ViewBinding>(
         super.onDestroyView()
         _binding = null
     }
-
-
 }

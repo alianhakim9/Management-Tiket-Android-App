@@ -7,7 +7,7 @@
     android:padding="10dp"
     tools:context=".presentation.MainActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_user"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -15,6 +15,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toStartOf="@+id/cv_ticket"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,15 +28,16 @@
             android:text="User"
             android:textSize="15sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_ticket"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cv_user"
@@ -48,9 +50,9 @@
             android:text="Tiket"
             android:textSize="15sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_order"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -58,6 +60,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintStart_toStartOf="@+id/cv_user"
         app:layout_constraintTop_toBottomOf="@+id/cv_user">
 
@@ -68,9 +71,9 @@
             android:text="Order"
             android:textSize="15sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_logout"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -78,6 +81,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintStart_toStartOf="@+id/cv_ticket"
         app:layout_constraintTop_toBottomOf="@+id/cv_user">
 
@@ -88,6 +92,6 @@
             android:text="Keluar"
             android:textSize="15sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

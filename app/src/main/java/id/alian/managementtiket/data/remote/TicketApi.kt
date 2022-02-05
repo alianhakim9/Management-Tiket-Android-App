@@ -11,11 +11,6 @@ import id.alian.managementtiket.domain.model.User
 import retrofit2.http.*
 
 interface TicketApi {
-    @GET("auth/user/get")
-    suspend fun getUsers(): List<UserDto>
-
-    @GET("order/list-order")
-    suspend fun getOrders(): List<OrdersDto>
 
     @GET("payment/payment-checkout")
     suspend fun getPaymentCheckout(): List<PaymentDto>
@@ -50,4 +45,10 @@ interface TicketApi {
         @Field("ticket_count") ticketCount: Int,
         @Field("price") price: Int
     ): CreateOrderDto
+
+    @GET("auth/user/order/list-order")
+    suspend fun getOrders(
+        @Header("Authorization") token: String
+    ): List<OrdersDto>
+
 }

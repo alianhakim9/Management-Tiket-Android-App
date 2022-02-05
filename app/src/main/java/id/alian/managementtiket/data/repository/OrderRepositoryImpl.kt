@@ -9,8 +9,8 @@ import javax.inject.Inject
 class OrderRepositoryImpl @Inject constructor(
     private val api: TicketApi
 ) : OrderRepository {
-    override suspend fun getOrders(): List<OrdersDto> {
-        return api.getOrders()
+    override suspend fun getOrders(token: String): List<OrdersDto> {
+        return api.getOrders("Bearer $token")
     }
 
     override suspend fun createOrder(

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
@@ -13,7 +14,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import id.alian.managementtiket.commons.Constants.PREFERENCES_NAME
-
 
 // auth validation
 fun validateEmail(email: String): Boolean {
@@ -97,6 +97,7 @@ fun View.showShortSnackBarWithAction(
             block(snackBar)
         }
         snackBar.setBackgroundTint(colorHex)
+        snackBar.setActionTextColor(actionLabelColor)
     }.show()
 
 }
@@ -120,9 +121,11 @@ fun View.showLongSnackBarWithAction(
 // Intent
 fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
     val intent = Intent(this, it)
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
     intent.putExtras(Bundle().apply(extras))
     startActivity(intent)
 }
 
 // color
-public fun Context.getColorCompat(id: Int) = ContextCompat.getColor(this, id)
+fun Context.getColorCompat(id: Int) = ContextCompat.getColor(this, id)

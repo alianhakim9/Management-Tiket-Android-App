@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".TicketApp"
         android:allowBackup="true"
@@ -22,6 +21,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.orders.OrderActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".presentation.auth.AuthActivity"
@@ -34,13 +34,16 @@
         </activity>
         <activity
             android:name=".presentation.tickets.TicketActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".presentation.users.UserActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ class LoginUseCase @Inject constructor(
                 if (validateEmail(email)) {
                     if (validatePasswordLength(password.length)) {
                         try {
-                            emit(Resource.Loading())
+                            emit(Resource.Loading<LoginDto>())
                             val login = repository.login(email, password)
                             emit(Resource.Success<LoginDto>(login))
                         } catch (e: HttpException) {

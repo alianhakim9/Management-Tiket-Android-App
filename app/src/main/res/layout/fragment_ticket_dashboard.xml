@@ -7,11 +7,12 @@
     android:padding="10dp"
     tools:context=".presentation.tickets.fragments.TicketDashboardFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_list_ticket"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,6 +23,6 @@
             android:text="Daftar Tiket"
             android:textStyle="bold" />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

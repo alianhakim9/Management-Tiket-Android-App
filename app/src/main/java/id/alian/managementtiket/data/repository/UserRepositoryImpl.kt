@@ -8,10 +8,6 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val api: TicketApi
 ) : UserRepository {
-    override suspend fun getUsers(): List<UserDto> {
-        return api.getUsers()
-    }
-
     override suspend fun getProfile(token: String): UserDto {
         return api.getProfile("Bearer $token")
     }

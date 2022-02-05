@@ -4,23 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".presentation.tickets.fragments.DetailTicketFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Detail Tiket" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         android:id="@+id/tv_ticket_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:text="From : 2020-04-15 16:26:20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/tv_ticket_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="To : 0521-06-24 02:34:49"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_ticket_from"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_from" />
 
     <TextView
@@ -28,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time : 01:36:43"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_ticket_to"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_to" />
 
     <TextView
@@ -38,13 +58,14 @@
         android:text="Price : $ 5051"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_ticket_time"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_time" />
 
     <TextView
         android:id="@+id/tv_ticket_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:text="Stok : 265"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_price"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +113,7 @@
         android:contentDescription="decrease"
         android:src="@drawable/ic_horizontal_line"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btn_buy"
         app:layout_constraintTop_toTopOf="@+id/tv_ticket_count_user" />
 
     <ImageButton
@@ -102,15 +123,16 @@
         android:contentDescription="increase"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_buy"
         app:layout_constraintTop_toTopOf="@+id/tv_ticket_count_user" />
 
     <Button
         android:id="@+id/btn_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="beli"
+        android:text="@string/text_order_button"
         app:icon="@drawable/ic_add"
+        android:layout_margin="10dp"
         app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

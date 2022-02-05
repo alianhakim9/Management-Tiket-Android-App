@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import id.alian.managementtiket.databinding.TicketItemLayoutBinding
+import id.alian.managementtiket.databinding.ItemTicketLayoutBinding
 import id.alian.managementtiket.domain.model.Ticket
 
 class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
-    class ViewHolder(val binding: TicketItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemTicketLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Ticket>() {
         override fun areItemsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
@@ -26,7 +26,7 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            TicketItemLayoutBinding.inflate(
+            ItemTicketLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

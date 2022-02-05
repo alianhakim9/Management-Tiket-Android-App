@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import id.alian.managementtiket.databinding.OrderItemLayoutBinding
+import id.alian.managementtiket.databinding.ItemOrderLayoutBinding
 import id.alian.managementtiket.domain.model.Order
 
 class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
-    class ViewHolder(val binding: OrderItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemOrderLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Order>() {
         override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
@@ -27,7 +27,7 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            OrderItemLayoutBinding.inflate(
+            ItemOrderLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

@@ -1,13 +1,16 @@
 package id.alian.managementtiket.presentation.tickets.fragments
 
 import android.annotation.SuppressLint
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentDetailTicketBinding
+import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.presentation.orders.viewmodel.OrderViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -46,39 +49,59 @@ class DetailTicketFragment :
                     price = args.ticketDetail?.price.toString().toInt()
                 )
             }
-        }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        lifecycleScope.launchWhenCreated {
-            viewModel.createOrderState.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.btnBuy.disable()
-                    }
+            binding.topAppBar.setNavigationOnClickListener {
+                findNavController().navigate(
+                    DetailTicketFragmentDirections.actionDetailTicketFragmentToTicketListFragment()
+                )
+            }
 
-                    is Resource.Success -> {
-                        binding.root.showShortSnackBarWithAction(
-                            message = "Berhasil ditambahkan ke keranjang",
-                            actionLabel = "Ok",
-                            block = { snackBar ->
-                                snackBar.dismiss()
-                            },
-                            colorHex = requireContext().getColorCompat(R.color.success),
-                            actionLabelColor = requireContext().getColorCompat(R.color.black)
-                        )
-                    }
+            lifecycleScope.launchWhenCreated {
+                viewModel.createOrderState.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.btnBuy.text = resources.getString(R.string.is_order_button)
+                            binding.btnBuy.disable()
+                        }
 
-                    is Resource.Error -> {
-                        binding.root.showShortSnackBar(
-                            message = it.message!!,
-                            colorHex = requireContext().getColorCompat(R.color.error_red)
-                        )
+                        is Resource.Success -> {
+                            binding.btnBuy.text = resources.getString(R.string.text_order_button)
+                            binding.btnBuy.enable()
+                            binding.root.showShortSnackBarWithAction(
+                                message = "Berhasil ditambahkan ke keranjang",
+                                actionLabel = "Ok",
+                                block = { snackBar ->
+                                    snackBar.dismiss()
+                                },
+                                colorHex = requireContext().getColorCompat(R.color.success),
+                                actionLabelColor = requireContext().getColorCompat(R.color.black)
+                            )
+                        }
+
+                        is Resource.Error -> {
+                            binding.btnBuy.text = resources.getString(R.string.text_order_button)
+                            binding.btnBuy.enable()
+                            binding.root.showShortSnackBar(
+                                message = it.message!!,
+                                colorHex = requireContext().getColorCompat(R.color.error_red)
+                            )
+                        }
                     }
-                    else -> Unit
                 }
             }
         }
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    // Handle the back button event
+                    findNavController().navigate(
+                        DetailTicketFragmentDirections.actionDetailTicketFragmentToTicketListFragment()
+                    )
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
+
+
 }
