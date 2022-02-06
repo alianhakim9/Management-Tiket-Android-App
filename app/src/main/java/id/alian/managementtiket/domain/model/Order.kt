@@ -2,6 +2,8 @@ package id.alian.managementtiket.domain.model
 
 import id.alian.managementtiket.data.remote.dto.TicketDto
 import id.alian.managementtiket.data.remote.dto.UserDto
+import java.io.Serializable
+
 
 data class Order(
     val id: Int,
@@ -12,4 +14,4 @@ data class Order(
     val status: String,
     val users: UserDto,
     val ticket: TicketDto
-)
+) : Serializable

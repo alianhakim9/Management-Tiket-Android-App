@@ -1,10 +1,10 @@
-package id.alian.managementtiket.data.repository
+package id.alian.managementtiket.domain.repository
 
 import id.alian.managementtiket.data.remote.TicketApi
 import id.alian.managementtiket.data.remote.dto.auth.LoginDto
 import id.alian.managementtiket.data.remote.dto.auth.RegisterDto
+import id.alian.managementtiket.data.repository.AuthRepository
 import id.alian.managementtiket.domain.model.User
-import id.alian.managementtiket.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

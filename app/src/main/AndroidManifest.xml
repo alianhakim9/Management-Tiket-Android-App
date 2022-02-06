@@ -18,6 +18,7 @@
         tools:targetApi="m">
         <activity
             android:name=".presentation.payment.PaymentActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".presentation.orders.OrderActivity"
@@ -25,6 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.auth.AuthActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +45,7 @@
         <activity
             android:name=".presentation.MainActivity"
             android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop" />
     </application>
 

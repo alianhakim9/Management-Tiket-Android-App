@@ -1,10 +1,10 @@
 package id.alian.managementtiket.data.remote
 
-import id.alian.managementtiket.data.remote.dto.OrdersDto
+import id.alian.managementtiket.data.remote.dto.order.OrdersDto
 import id.alian.managementtiket.data.remote.dto.PaymentDto
 import id.alian.managementtiket.data.remote.dto.TicketDto
 import id.alian.managementtiket.data.remote.dto.UserDto
-import id.alian.managementtiket.data.remote.dto.auth.CreateOrderDto
+import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.remote.dto.auth.LoginDto
 import id.alian.managementtiket.data.remote.dto.auth.RegisterDto
 import id.alian.managementtiket.domain.model.User
@@ -44,11 +44,21 @@ interface TicketApi {
         @Field("ticket_id") ticketId: Int,
         @Field("ticket_count") ticketCount: Int,
         @Field("price") price: Int
-    ): CreateOrderDto
+    ): CreateOrderPaymentDto
 
     @GET("auth/user/order/list-order")
     suspend fun getOrders(
         @Header("Authorization") token: String
     ): List<OrdersDto>
+
+    @FormUrlEncoded
+    @POST("auth/user/checkout-order")
+    suspend fun addPayment(
+        @Header("Authorization") token: String,
+        @Field("order_id") orderId: Int,
+        @Field("sum_price") sumPrice: Int = 200000,
+        @Field("bank_id") bankId: String,
+        @Field("code_bank_user") userBankCode: String
+    ): CreateOrderPaymentDto
 
 }

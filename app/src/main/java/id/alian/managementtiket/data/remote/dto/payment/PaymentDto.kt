@@ -1,4 +1,4 @@
-package id.alian.managementtiket.data.remote.dto
+package id.alian.managementtiket.data.remote.dto.payment
 
 import id.alian.managementtiket.domain.model.Payment
 

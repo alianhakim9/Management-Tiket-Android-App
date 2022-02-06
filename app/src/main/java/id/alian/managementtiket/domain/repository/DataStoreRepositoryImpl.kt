@@ -1,10 +1,10 @@
-package id.alian.managementtiket.data.repository
+package id.alian.managementtiket.domain.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import id.alian.managementtiket.commons.dataStore
-import id.alian.managementtiket.domain.repository.DataStoreRepository
+import id.alian.managementtiket.data.repository.DataStoreRepository
 import kotlinx.coroutines.flow.first
 import java.lang.Exception
 import javax.inject.Inject

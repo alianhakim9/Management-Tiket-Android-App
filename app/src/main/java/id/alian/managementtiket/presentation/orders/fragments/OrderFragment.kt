@@ -1,5 +1,6 @@
 package id.alian.managementtiket.presentation.orders.fragments
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -7,22 +8,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
-import id.alian.managementtiket.databinding.FragmentOrderDashboardBinding
+import id.alian.managementtiket.databinding.FragmentOrderBinding
 import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.presentation.orders.adapter.OrderAdapter
 import id.alian.managementtiket.presentation.orders.viewmodel.OrderViewModel
+import id.alian.managementtiket.presentation.payment.PaymentActivity
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class OrderDashboardFragment :
-    BaseFragment<FragmentOrderDashboardBinding>(FragmentOrderDashboardBinding::inflate) {
+class OrderFragment :
+    BaseFragment<FragmentOrderBinding>(FragmentOrderBinding::inflate) {
 
     private val orderAdapter by lazy { OrderAdapter() }
     private val viewModel: OrderViewModel by viewModels()
 
-    override fun FragmentOrderDashboardBinding.initialize() {
+    override fun FragmentOrderBinding.initialize() {
         requireActivity().runOnUiThread {
             setupRecyclerView()
+
             binding.topAppBar.setNavigationOnClickListener {
                 requireActivity().finish()
             }
@@ -47,6 +50,12 @@ class OrderDashboardFragment :
                         }
                     }
                 }
+            }
+
+            orderAdapter.setOnItemClickListener { order ->
+                requireContext().openActivity(PaymentActivity::class.java, extras = {
+                    putSerializable("order", order)
+                })
             }
         }
     }

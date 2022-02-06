@@ -1,8 +1,8 @@
-package id.alian.managementtiket.data.repository
+package id.alian.managementtiket.domain.repository
 
 import id.alian.managementtiket.data.remote.TicketApi
 import id.alian.managementtiket.data.remote.dto.TicketDto
-import id.alian.managementtiket.domain.repository.TicketRepository
+import id.alian.managementtiket.data.repository.TicketRepository
 import javax.inject.Inject
 
 class TicketRepositoryImpl @Inject constructor(

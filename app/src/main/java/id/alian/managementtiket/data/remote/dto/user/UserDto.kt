@@ -1,6 +1,7 @@
-package id.alian.managementtiket.data.remote.dto
+package id.alian.managementtiket.data.remote.dto.user
 
 import id.alian.managementtiket.domain.model.User
+import java.io.Serializable
 
 data class UserDto(
     val created_at: String,
@@ -9,7 +10,7 @@ data class UserDto(
     val id: Int,
     val name: String,
     val updated_at: String
-)
+) : Serializable
 
 fun UserDto.toUser(): User {
     return User(

@@ -3,7 +3,7 @@ package id.alian.managementtiket.domain.use_case.payment.get_payment
 import android.util.Log
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.toPayment
-import id.alian.managementtiket.data.repository.PaymentRepositoryImpl
+import id.alian.managementtiket.domain.repository.PaymentRepositoryImpl
 import id.alian.managementtiket.domain.model.Payment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

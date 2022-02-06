@@ -1,4 +1,4 @@
-package id.alian.managementtiket.domain.repository
+package id.alian.managementtiket.data.repository
 
 import id.alian.managementtiket.data.remote.dto.TicketDto
 

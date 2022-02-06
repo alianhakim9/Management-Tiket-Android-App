@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.alian.managementtiket.commons.Resource
-import id.alian.managementtiket.data.remote.dto.auth.CreateOrderDto
+import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.domain.model.Order
 import id.alian.managementtiket.domain.use_case.orders.create_order.CreateOrderUseCase
 import id.alian.managementtiket.domain.use_case.orders.get_orders.GetOrderUseCase
@@ -25,8 +25,8 @@ class OrderViewModel @Inject constructor(
     private val _orderListState = MutableSharedFlow<Resource<List<Order>>>()
     val orderListState: SharedFlow<Resource<List<Order>>> = _orderListState
 
-    private val _createOrderState = MutableSharedFlow<Resource<CreateOrderDto>>()
-    val createOrderState: SharedFlow<Resource<CreateOrderDto>> = _createOrderState
+    private val _createOrderState = MutableSharedFlow<Resource<CreateOrderPaymentDto>>()
+    val createOrderPaymentState: SharedFlow<Resource<CreateOrderPaymentDto>> = _createOrderState
 
     private var _ticketCount = MutableLiveData<Int>(0)
     val ticketCount: LiveData<Int> = _ticketCount

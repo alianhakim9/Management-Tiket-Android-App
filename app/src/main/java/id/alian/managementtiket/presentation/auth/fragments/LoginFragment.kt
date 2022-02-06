@@ -1,5 +1,7 @@
 package id.alian.managementtiket.presentation.auth.fragments
 
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun FragmentLoginBinding.initialize() {
         requireActivity().runOnUiThread {
+
+            binding.etEmail.editText?.addTextChangedListener(loginTextWatcher)
+            binding.etPassword.editText?.addTextChangedListener(loginTextWatcher)
+
             binding.btnToRegister.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
@@ -75,5 +81,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.etPassword.enable()
         binding.btnLogin.enable()
         binding.btnToRegister.enable()
+    }
+
+    private val loginTextWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            val email = binding.etEmail.editText?.text.toString().trim()
+            val password = binding.etPassword.editText?.text.toString().trim()
+            binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+        }
     }
 }

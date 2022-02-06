@@ -2,8 +2,8 @@ package id.alian.managementtiket.domain.use_case.orders.create_order
 
 import android.util.Log
 import id.alian.managementtiket.commons.Resource
-import id.alian.managementtiket.data.remote.dto.auth.CreateOrderDto
-import id.alian.managementtiket.domain.repository.OrderRepository
+import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
+import id.alian.managementtiket.data.repository.OrderRepository
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,24 +19,24 @@ class CreateOrderUseCase @Inject constructor(
         ticketId: Int,
         ticketCount: Int,
         price: Int
-    ): Flow<Resource<CreateOrderDto>> = flow {
+    ): Flow<Resource<CreateOrderPaymentDto>> = flow {
         try {
-            emit(Resource.Loading<CreateOrderDto>())
+            emit(Resource.Loading<CreateOrderPaymentDto>())
             dataStoreUseCase.getToken()?.let {
                 val order = repository.createOrder(
                     it, ticketId, ticketCount, price
                 )
-                emit(Resource.Success<CreateOrderDto>(order))
+                emit(Resource.Success<CreateOrderPaymentDto>(order))
             }
         } catch (e: HttpException) {
             emit(
-                Resource.Error<CreateOrderDto>(
+                Resource.Error<CreateOrderPaymentDto>(
                     e.localizedMessage ?: "an unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
             Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<CreateOrderDto>("couldn't reach server. Check your internet connection"))
+            emit(Resource.Error<CreateOrderPaymentDto>("couldn't reach server. Check your internet connection"))
         }
     }
 }

@@ -35,6 +35,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
+    <EditText
+        android:id="@+id/et_from_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="from"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/et_to_filter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
+
+    <EditText
+        android:id="@+id/et_to_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="To"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_filter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/et_from_filter"
+        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        app:layout_constraintBottom_toTopOf="@+id/rv_ticket_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ticket_list"
         android:layout_width="match_parent"
@@ -43,6 +74,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
+        app:layout_constraintTop_toBottomOf="@+id/et_from_filter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

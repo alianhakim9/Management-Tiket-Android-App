@@ -1,4 +1,4 @@
-package id.alian.managementtiket.domain.repository
+package id.alian.managementtiket.data.repository
 
 interface DataStoreRepository {
     suspend fun putString(key: String, value: String)

@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/order"
+        android:contentDescription="Order"
+        android:icon="@drawable/ic_bookmark"
+        android:title="Order"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/profile"
+        android:contentDescription="Profile"
+        android:title="Profil"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/logout"
+        android:contentDescription="Logout"
+        android:title="Keluar"
+        app:showAsAction="never" />
+
+</menu>

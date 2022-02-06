@@ -5,11 +5,15 @@
     <string name="is_login_button">Sedang Login…</string>
     <string name="is_register_button">Sedang Mendaftar…</string>
     <string name="is_order_button">Sedang Order…</string>
+    <string name="is_payment_button">Melakukan Pembayaran…</string>
+    <string name="text_payment_button">Bayar</string>
     <string name="text_login_button">Masuk</string>
     <string name="text_register_button">Daftar</string>
     <string name="text_order_button">Order</string>
+    <string name="text_success_payment">Pembayaran Berhasil</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="fragment_login_title">Halaman Login</string>
     <string name="fragment_register_title">Halaman Register</string>
-</resources>
+    <string name="text_failed">Gagal</string>
+    </resources>

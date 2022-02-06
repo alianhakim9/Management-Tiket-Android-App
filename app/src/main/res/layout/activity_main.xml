@@ -4,92 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".presentation.MainActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_user"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="26dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/cv_ticket"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="User"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/dashboard_menu"
+            app:title="E-Tiket" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_ticket"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cv_user"
-        app:layout_constraintTop_toTopOf="@+id/cv_user">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Tiket"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_order"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="@+id/cv_user"
-        app:layout_constraintTop_toBottomOf="@+id/cv_user">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Order"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_logout"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="@+id/cv_ticket"
-        app:layout_constraintTop_toBottomOf="@+id/cv_user">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Keluar"
+            android:text="Beli Tiket"
             android:textSize="15sp"
             android:textStyle="bold" />
     </com.google.android.material.card.MaterialCardView>

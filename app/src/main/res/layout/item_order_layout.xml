@@ -11,25 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="From : 2020-04-15 16:26:20"
-        app:layout_constraintBottom_toTopOf="@+id/tv_ticket_to"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_ticket_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
         android:text="To : 0521-06-24 02:34:49"
-        app:layout_constraintBottom_toTopOf="@+id/tv_ticket_time"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_from" />
 
     <TextView
         android:id="@+id/tv_ticket_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time : 01:36:43"
-        app:layout_constraintBottom_toTopOf="@+id/tv_ticket_count"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_to" />
 
 
     <TextView
@@ -37,25 +36,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Count : 748"
-        app:layout_constraintBottom_toTopOf="@+id/tv_ticket_price"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_time" />
 
     <TextView
         android:id="@+id/tv_ticket_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Price : $ 5051"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_count" />
 
     <TextView
         android:id="@+id/tv_ticket_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status : "
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_ticket_price" />
+
+    <Button
+        android:id="@+id/btn_checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="checkout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_status" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
-package id.alian.managementtiket.data.repository
+package id.alian.managementtiket.domain.repository
 
 import id.alian.managementtiket.data.remote.TicketApi
-import id.alian.managementtiket.data.remote.dto.OrdersDto
-import id.alian.managementtiket.data.remote.dto.auth.CreateOrderDto
-import id.alian.managementtiket.domain.repository.OrderRepository
+import id.alian.managementtiket.data.remote.dto.order.OrdersDto
+import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
+import id.alian.managementtiket.data.repository.OrderRepository
 import javax.inject.Inject
 
 class OrderRepositoryImpl @Inject constructor(
@@ -18,7 +18,7 @@ class OrderRepositoryImpl @Inject constructor(
         ticketId: Int,
         ticketCount: Int,
         price: Int
-    ): CreateOrderDto {
+    ): CreateOrderPaymentDto {
         return api.createTicketOrder(
             token = "Bearer $token",
             ticketId, ticketCount, price

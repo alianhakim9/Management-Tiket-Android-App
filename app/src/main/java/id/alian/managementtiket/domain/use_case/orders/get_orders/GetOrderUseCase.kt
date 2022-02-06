@@ -2,9 +2,9 @@ package id.alian.managementtiket.domain.use_case.orders.get_orders
 
 import android.util.Log
 import id.alian.managementtiket.commons.Resource
-import id.alian.managementtiket.data.remote.dto.toOrder
+import id.alian.managementtiket.data.remote.dto.order.toOrder
 import id.alian.managementtiket.domain.model.Order
-import id.alian.managementtiket.domain.repository.OrderRepository
+import id.alian.managementtiket.data.repository.OrderRepository
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,10 +1,10 @@
 package id.alian.managementtiket.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.openActivity
 import id.alian.managementtiket.commons.showMaterialAlertDialog
 import id.alian.managementtiket.databinding.ActivityMainBinding
@@ -26,32 +26,39 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             viewModel.getToken()
             setContentView(binding.root)
-            binding.cvUser.setOnClickListener {
-                this.openActivity(UserActivity::class.java)
-            }
 
             binding.cvTicket.setOnClickListener {
                 this.openActivity(TicketActivity::class.java)
             }
 
-            binding.cvOrder.setOnClickListener {
-                this.openActivity(OrderActivity::class.java)
-            }
+            binding.topAppBar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.profile -> {
+                        this.openActivity(UserActivity::class.java)
+                        true
+                    }
 
-            binding.cvLogout.setOnClickListener {
-                this.showMaterialAlertDialog(
-                    positiveButtonLabel = "Keluar",
-                    actionOnPositiveButton = {
-                        viewModel.logout()
-                        Intent(this, AuthActivity::class.java).also {
-                            startActivity(it)
-                            finish()
-                        }
-                    },
-                    negativeButtonLabel = "Batal",
-                    title = "Keluar",
-                    message = "Anda yakin ?"
-                )
+                    R.id.logout -> {
+                        this.showMaterialAlertDialog(
+                            positiveButtonLabel = "Keluar",
+                            actionOnPositiveButton = {
+                                viewModel.logout()
+                                this.openActivity(AuthActivity::class.java)
+                                finish()
+                            },
+                            negativeButtonLabel = "Batal",
+                            title = "Keluar",
+                            message = "Anda yakin ?"
+                        )
+                        true
+                    }
+
+                    R.id.order -> {
+                        this.openActivity(OrderActivity::class.java)
+                        true
+                    }
+                    else -> false
+                }
             }
         }
     }

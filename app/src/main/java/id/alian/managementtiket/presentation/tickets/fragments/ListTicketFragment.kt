@@ -1,5 +1,7 @@
 package id.alian.managementtiket.presentation.tickets.fragments
 
+import android.util.Log
+import androidx.compose.ui.text.toLowerCase
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -8,10 +10,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentListTicketBinding
+import id.alian.managementtiket.domain.model.Ticket
 import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.presentation.tickets.adapter.TicketAdapter
 import id.alian.managementtiket.presentation.tickets.viewmodel.TicketViewModel
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class ListTicketFragment :
@@ -56,6 +61,12 @@ class ListTicketFragment :
                         }
                     }
                 }
+            }
+
+            binding.btnFilter.setOnClickListener {
+                ticketAdapter.filter.filter(
+                    binding.etFromFilter.text.toString()
+                )
             }
         }
     }

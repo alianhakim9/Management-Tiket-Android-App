@@ -1,12 +1,15 @@
 package id.alian.managementtiket.presentation.orders.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
+import android.graphics.Color.GREEN
+import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import id.alian.managementtiket.commons.remove
+import id.alian.managementtiket.commons.show
 import id.alian.managementtiket.databinding.ItemOrderLayoutBinding
 import id.alian.managementtiket.domain.model.Order
 
@@ -41,17 +44,32 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
         holder.binding.tvTicketFrom.text = "From : ${orders.ticket.from}"
         holder.binding.tvTicketTo.text = "To : ${orders.ticket.to}"
         holder.binding.tvTicketTime.text = "Time : ${orders.ticket.time}"
-        holder.binding.tvTicketPrice.text = "Price :$ ${orders.price}"
+        holder.binding.tvTicketPrice.text = "Price : $ ${orders.price}"
+        holder.binding.tvTicketCount.text = "Count : ${orders.ticket_count}"
+
         if (orders.status != "0") {
             holder.binding.tvTicketStatus.text = "Sudah Dibayar"
-            holder.binding.tvTicketStatus.setTextColor(Color.GREEN)
+            holder.binding.tvTicketStatus.setTextColor(GREEN)
+            holder.binding.btnCheckout.remove()
         } else {
             holder.binding.tvTicketStatus.text = "Belum Dibayar"
-            holder.binding.tvTicketStatus.setTextColor(Color.RED)
+            holder.binding.tvTicketStatus.setTextColor(RED)
+            holder.binding.btnCheckout.show()
+            holder.binding.btnCheckout.setOnClickListener {
+                onItemClickListener?.let {
+                    it(orders)
+                }
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((Order) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Order) -> Unit) {
+        onItemClickListener = listener
     }
 }

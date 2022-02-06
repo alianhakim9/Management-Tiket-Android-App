@@ -1,6 +1,7 @@
-package id.alian.managementtiket.data.remote.dto
+package id.alian.managementtiket.data.remote.dto.ticket
 
 import id.alian.managementtiket.domain.model.Ticket
+import java.io.Serializable
 
 data class TicketDto(
     val created_at: String,
@@ -11,7 +12,7 @@ data class TicketDto(
     val time: String,
     val to: String,
     val updated_at: String
-)
+) : Serializable
 
 fun TicketDto.toTicket(): Ticket {
     return Ticket(

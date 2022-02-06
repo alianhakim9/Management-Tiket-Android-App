@@ -10,6 +10,7 @@ import id.alian.managementtiket.domain.model.User
 import id.alian.managementtiket.domain.use_case.auth.LoginUseCase
 import id.alian.managementtiket.domain.use_case.auth.RegisterUseCase
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
+import id.alian.managementtiket.domain.use_case.users.get_profile.GetProfileUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseCase,
-    private val dataStoreUseCase: DataStoreUseCase
+    private val dataStoreUseCase: DataStoreUseCase,
 ) : ViewModel() {
 
     private val _login = MutableSharedFlow<Resource<LoginDto>>()

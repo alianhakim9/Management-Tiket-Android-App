@@ -11,6 +11,7 @@ import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.FragmentDetailTicketBinding
 import id.alian.managementtiket.presentation.BaseFragment
+import id.alian.managementtiket.presentation.orders.OrderActivity
 import id.alian.managementtiket.presentation.orders.viewmodel.OrderViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -57,7 +58,7 @@ class DetailTicketFragment :
             }
 
             lifecycleScope.launchWhenCreated {
-                viewModel.createOrderState.collectLatest {
+                viewModel.createOrderPaymentState.collectLatest {
                     when (it) {
                         is Resource.Loading -> {
                             binding.btnBuy.text = resources.getString(R.string.is_order_button)
@@ -69,12 +70,12 @@ class DetailTicketFragment :
                             binding.btnBuy.enable()
                             binding.root.showShortSnackBarWithAction(
                                 message = "Berhasil ditambahkan ke keranjang",
-                                actionLabel = "Ok",
-                                block = { snackBar ->
-                                    snackBar.dismiss()
+                                actionLabel = resources.getString(R.string.ok),
+                                block = {
+                                    requireActivity().openActivity(OrderActivity::class.java)
                                 },
                                 colorHex = requireContext().getColorCompat(R.color.success),
-                                actionLabelColor = requireContext().getColorCompat(R.color.black)
+                                actionLabelColor = requireContext().getColorCompat(R.color.white)
                             )
                         }
 
@@ -85,6 +86,7 @@ class DetailTicketFragment :
                                 message = it.message!!,
                                 colorHex = requireContext().getColorCompat(R.color.error_red)
                             )
+
                         }
                     }
                 }
