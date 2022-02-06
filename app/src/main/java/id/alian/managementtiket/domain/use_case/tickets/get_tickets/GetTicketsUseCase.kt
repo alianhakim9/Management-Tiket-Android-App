@@ -3,6 +3,7 @@ package id.alian.managementtiket.domain.use_case.tickets.get_tickets
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
+import id.alian.managementtiket.data.remote.dto.ticket.toTicket
 import id.alian.managementtiket.domain.model.Ticket
 import id.alian.managementtiket.data.repository.TicketRepository
 import kotlinx.coroutines.flow.Flow

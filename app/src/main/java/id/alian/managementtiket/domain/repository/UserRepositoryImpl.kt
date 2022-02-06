@@ -1,7 +1,7 @@
 package id.alian.managementtiket.domain.repository
 
 import id.alian.managementtiket.data.remote.TicketApi
-import id.alian.managementtiket.data.remote.dto.UserDto
+import id.alian.managementtiket.data.remote.dto.user.UserDto
 import id.alian.managementtiket.data.repository.UserRepository
 import javax.inject.Inject
 

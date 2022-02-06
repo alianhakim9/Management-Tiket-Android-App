@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
+import id.alian.managementtiket.data.remote.dto.order.OrderDetailDto
 import id.alian.managementtiket.domain.model.Order
 import id.alian.managementtiket.domain.use_case.orders.create_order.CreateOrderUseCase
 import id.alian.managementtiket.domain.use_case.orders.get_orders.GetOrderUseCase
+import id.alian.managementtiket.domain.use_case.orders.order_detail.OrderDetailUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
@@ -20,6 +22,7 @@ import javax.inject.Inject
 class OrderViewModel @Inject constructor(
     val getOrderUseCase: GetOrderUseCase,
     val createOrderUseCase: CreateOrderUseCase,
+    val orderDetailUseCase: OrderDetailUseCase
 ) : ViewModel() {
 
     private val _orderListState = MutableSharedFlow<Resource<List<Order>>>()
@@ -28,11 +31,15 @@ class OrderViewModel @Inject constructor(
     private val _createOrderState = MutableSharedFlow<Resource<CreateOrderPaymentDto>>()
     val createOrderPaymentState: SharedFlow<Resource<CreateOrderPaymentDto>> = _createOrderState
 
+    private val _orderDetailState = MutableSharedFlow<Resource<List<OrderDetailDto>>>()
+    val orderDetailState: SharedFlow<Resource<List<OrderDetailDto>>> = _orderDetailState
+
     private var _ticketCount = MutableLiveData<Int>(0)
     val ticketCount: LiveData<Int> = _ticketCount
 
     init {
         getOrders()
+        orderDetail()
     }
 
     private fun getOrders() {
@@ -49,6 +56,12 @@ class OrderViewModel @Inject constructor(
                 _createOrderState.emit(result)
             }.launchIn(viewModelScope)
         }
+    }
+
+    fun orderDetail() {
+        orderDetailUseCase().onEach { result ->
+            _orderDetailState.emit(result)
+        }.launchIn(viewModelScope)
     }
 
     fun decreaseCount() {

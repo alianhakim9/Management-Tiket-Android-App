@@ -2,8 +2,9 @@ package id.alian.managementtiket.domain.use_case.users.get_profile
 
 import android.util.Log
 import id.alian.managementtiket.commons.Resource
-import id.alian.managementtiket.domain.model.User
+import id.alian.managementtiket.data.remote.dto.user.toUser
 import id.alian.managementtiket.data.repository.UserRepository
+import id.alian.managementtiket.domain.model.User
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

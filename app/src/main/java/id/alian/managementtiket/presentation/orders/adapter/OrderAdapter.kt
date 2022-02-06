@@ -51,10 +51,17 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
             holder.binding.tvTicketStatus.text = "Sudah Dibayar"
             holder.binding.tvTicketStatus.setTextColor(GREEN)
             holder.binding.btnCheckout.remove()
+            holder.binding.btnOrderDetail.show()
+            holder.binding.btnOrderDetail.setOnClickListener {
+                detailOrderListener?.let {
+                    it(orders)
+                }
+            }
         } else {
             holder.binding.tvTicketStatus.text = "Belum Dibayar"
             holder.binding.tvTicketStatus.setTextColor(RED)
             holder.binding.btnCheckout.show()
+            holder.binding.btnOrderDetail.remove()
             holder.binding.btnCheckout.setOnClickListener {
                 onItemClickListener?.let {
                     it(orders)
@@ -68,8 +75,14 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     }
 
     private var onItemClickListener: ((Order) -> Unit)? = null
+    private var detailOrderListener: ((Order) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Order) -> Unit) {
         onItemClickListener = listener
+    }
+
+
+    fun detailOrder(listener: (Order) -> Unit) {
+        detailOrderListener = listener
     }
 }

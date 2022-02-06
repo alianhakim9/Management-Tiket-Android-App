@@ -1,7 +1,7 @@
 package id.alian.managementtiket.domain.model
 
-import id.alian.managementtiket.data.remote.dto.TicketDto
-import id.alian.managementtiket.data.remote.dto.UserDto
+import id.alian.managementtiket.data.remote.dto.ticket.TicketDto
+import id.alian.managementtiket.data.remote.dto.user.UserDto
 import java.io.Serializable
 
 

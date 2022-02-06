@@ -1,8 +1,8 @@
 package id.alian.managementtiket.presentation.orders.fragments
 
-import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +56,10 @@ class OrderFragment :
                 requireContext().openActivity(PaymentActivity::class.java, extras = {
                     putSerializable("order", order)
                 })
+            }
+
+            orderAdapter.detailOrder { order ->
+                findNavController().navigate(OrderFragmentDirections.actionOrderDashboardFragmentToOrderDetailFragment())
             }
         }
     }

@@ -1,12 +1,13 @@
 package id.alian.managementtiket.data.remote
 
-import id.alian.managementtiket.data.remote.dto.order.OrdersDto
-import id.alian.managementtiket.data.remote.dto.PaymentDto
-import id.alian.managementtiket.data.remote.dto.TicketDto
-import id.alian.managementtiket.data.remote.dto.UserDto
-import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.remote.dto.auth.LoginDto
 import id.alian.managementtiket.data.remote.dto.auth.RegisterDto
+import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
+import id.alian.managementtiket.data.remote.dto.order.OrderDetailDto
+import id.alian.managementtiket.data.remote.dto.order.OrdersDto
+import id.alian.managementtiket.data.remote.dto.payment.PaymentDto
+import id.alian.managementtiket.data.remote.dto.ticket.TicketDto
+import id.alian.managementtiket.data.remote.dto.user.UserDto
 import id.alian.managementtiket.domain.model.User
 import retrofit2.http.*
 
@@ -60,5 +61,10 @@ interface TicketApi {
         @Field("bank_id") bankId: String,
         @Field("code_bank_user") userBankCode: String
     ): CreateOrderPaymentDto
+
+    @GET("auth/user/status-payment")
+    suspend fun orderDetail(
+        @Header("Authorization") token: String
+    ): List<OrderDetailDto>
 
 }

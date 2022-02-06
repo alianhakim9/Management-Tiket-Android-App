@@ -16,4 +16,4 @@
     <string name="fragment_login_title">Halaman Login</string>
     <string name="fragment_register_title">Halaman Register</string>
     <string name="text_failed">Gagal</string>
-    </resources>
+</resources>

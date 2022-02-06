@@ -30,7 +30,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,8 +43,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="false"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
             android:launchMode="singleTop" />
     </application>
 
