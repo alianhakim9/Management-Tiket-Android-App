@@ -70,6 +70,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun showLoading() {
         binding.btnRegister.text = resources.getString(R.string.is_register_button)
+        binding.btnRegister.disable()
+        binding.btnToLogin.disable()
         binding.etName.disable()
         binding.etEmail.disable()
         binding.etPassword.disable()
@@ -77,6 +79,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     private fun hideLoading() {
         binding.btnRegister.text = resources.getString(R.string.text_register_button)
+        binding.btnRegister.enable()
+        binding.btnToLogin.enable()
         binding.etName.enable()
         binding.etEmail.enable()
         binding.etPassword.enable()

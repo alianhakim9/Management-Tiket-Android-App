@@ -9,20 +9,5 @@
         android:id="@+id/orderDashboardFragment"
         android:name="id.alian.managementtiket.presentation.orders.fragments.OrderFragment"
         android:label="fragment_order_dashboard"
-        tools:layout="@layout/fragment_order" >
-        <action
-            android:id="@+id/action_orderDashboardFragment_to_orderDetailFragment"
-            app:destination="@id/orderDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/orderDetailFragment"
-        android:name="id.alian.managementtiket.presentation.orders.fragments.OrderDetailFragment"
-        android:label="fragment_order_detail"
-        tools:layout="@layout/fragment_order_detail" >
-        <action
-            android:id="@+id/action_orderDetailFragment_to_orderDashboardFragment"
-            app:destination="@id/orderDashboardFragment"
-            app:popUpTo="@id/order_nav_graph"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_order" />
 </navigation>

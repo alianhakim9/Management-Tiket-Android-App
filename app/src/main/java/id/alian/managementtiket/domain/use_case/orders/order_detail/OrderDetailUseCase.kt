@@ -16,22 +16,22 @@ class OrderDetailUseCase @Inject constructor(
     private val repository: OrderRepository,
     private val dataStoreUseCase: DataStoreUseCase
 ) {
-    operator fun invoke(): Flow<Resource<List<OrderDetailDto>>> = flow {
+    operator fun invoke(orderId: Int): Flow<Resource<OrderDetailDto>> = flow {
         try {
-            emit(Resource.Loading<List<OrderDetailDto>>())
+            emit(Resource.Loading<OrderDetailDto>())
             dataStoreUseCase.getToken()?.let {
-                val orderDetail = repository.orderDetail(it)
+                val orderDetail = repository.orderDetail(it, orderId)
                 emit(Resource.Success(orderDetail))
             }
         } catch (e: HttpException) {
             emit(
-                Resource.Error<List<OrderDetailDto>>(
+                Resource.Error<OrderDetailDto>(
                     e.localizedMessage ?: "an unexpected error occurred"
                 )
             )
         } catch (e: IOException) {
             Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<List<OrderDetailDto>>("Could'n reach server. Check your internet connection"))
+            emit(Resource.Error<OrderDetailDto>("Could'n reach server. Check your internet connection"))
         }
     }
 }

@@ -1,19 +1,25 @@
 package id.alian.managementtiket.presentation.orders.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color.GREEN
 import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.remove
 import id.alian.managementtiket.commons.show
 import id.alian.managementtiket.databinding.ItemOrderLayoutBinding
 import id.alian.managementtiket.domain.model.Order
+import javax.inject.Inject
 
-class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter @Inject constructor(
+    val context: Context
+) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemOrderLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Order>() {
@@ -41,15 +47,20 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orders = differ.currentList[position]
-        holder.binding.tvTicketFrom.text = "From : ${orders.ticket.from}"
-        holder.binding.tvTicketTo.text = "To : ${orders.ticket.to}"
-        holder.binding.tvTicketTime.text = "Time : ${orders.ticket.time}"
-        holder.binding.tvTicketPrice.text = "Price : $ ${orders.price}"
-        holder.binding.tvTicketCount.text = "Count : ${orders.ticket_count}"
+        holder.binding.tvTicketFrom.text = "Dari : ${orders.ticket.from}"
+        holder.binding.tvTicketTo.text = "Tujuan : ${orders.ticket.to}"
+        holder.binding.tvTicketTime.text = "Waktu Keberangkatan : ${orders.ticket.time}"
+        holder.binding.tvTicketPrice.text = "Harga Tiket : Rp ${orders.price}"
+        holder.binding.tvTicketCount.text = "Jumlah Tiket : ${orders.ticket_count}"
 
         if (orders.status != "0") {
             holder.binding.tvTicketStatus.text = "Sudah Dibayar"
-            holder.binding.tvTicketStatus.setTextColor(GREEN)
+            holder.binding.tvTicketStatus.setTextColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.primary900
+                )
+            )
             holder.binding.btnCheckout.remove()
             holder.binding.btnOrderDetail.show()
             holder.binding.btnOrderDetail.setOnClickListener {
@@ -80,7 +91,6 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     fun setOnItemClickListener(listener: (Order) -> Unit) {
         onItemClickListener = listener
     }
-
 
     fun detailOrder(listener: (Order) -> Unit) {
         detailOrderListener = listener

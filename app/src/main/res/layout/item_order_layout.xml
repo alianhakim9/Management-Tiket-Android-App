@@ -72,6 +72,7 @@
         android:id="@+id/btn_order_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Detail Order"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

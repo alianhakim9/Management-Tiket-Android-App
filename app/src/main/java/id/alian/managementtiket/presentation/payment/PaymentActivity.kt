@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
@@ -14,6 +15,7 @@ import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
 import id.alian.managementtiket.databinding.ActivityPaymentBinding
 import id.alian.managementtiket.domain.model.Order
+import id.alian.managementtiket.presentation.orders.activities.OrderDetailActivity
 import id.alian.managementtiket.presentation.payment.viewmodel.PaymentViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -67,9 +69,17 @@ class PaymentActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.btnPay.enable()
                         binding.btnPay.text = resources.getString(R.string.text_payment_button)
-                        binding.root.showShortSnackBar(
-                            message = resources.getString(R.string.text_success_payment),
-                            colorHex = getColorCompat(R.color.success)
+                        binding.root.showShortSnackBarWithAction(
+                            message = "Pembayaran berhasil",
+                            actionLabel = "Detail Order",
+                            block = {
+                                openActivity(OrderDetailActivity::class.java, extras = {
+                                    putSerializable("order", order)
+                                })
+                                finish()
+                            },
+                            colorHex = getColorCompat(R.color.success),
+                            actionLabelColor = getColorCompat(R.color.white)
                         )
                     }
 
@@ -95,6 +105,7 @@ class PaymentActivity : AppCompatActivity() {
         binding.tvTicketTo.text = "To : ${order.ticket.to}"
         binding.tvTicketFrom.text = "From : ${order.ticket.from}"
         binding.tvTicketCount.text = "Count : ${order.ticket_count}"
+        binding.tvSumPrice.text = "Rp. ${order.price}"
         binding.tvTicketTime.text = "Time : ${order.ticket.time}"
     }
 

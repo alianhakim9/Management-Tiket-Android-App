@@ -38,6 +38,12 @@ interface TicketApi {
     @GET("ticket/list-get")
     suspend fun getTickets(): List<TicketDto>
 
+    @GET("ticket/list-get")
+    suspend fun getFilteredTickets(
+        @Query("from") from: String,
+        @Query("to") to: String
+    ): List<TicketDto>
+
     @FormUrlEncoded
     @POST("auth/user/order-ticket/create")
     suspend fun createTicketOrder(
@@ -62,9 +68,10 @@ interface TicketApi {
         @Field("code_bank_user") userBankCode: String
     ): CreateOrderPaymentDto
 
-    @GET("auth/user/status-payment")
+    @GET("auth/user/status-payment/{orderId}")
     suspend fun orderDetail(
-        @Header("Authorization") token: String
-    ): List<OrderDetailDto>
+        @Header("Authorization") token: String,
+        @Path("orderId") orderId: Int
+    ): OrderDetailDto
 
 }

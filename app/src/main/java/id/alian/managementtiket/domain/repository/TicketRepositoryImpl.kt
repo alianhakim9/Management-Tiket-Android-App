@@ -11,4 +11,8 @@ class TicketRepositoryImpl @Inject constructor(
     override suspend fun getTickets(): List<TicketDto> {
         return api.getTickets()
     }
+
+    override suspend fun getFilteredTickets(from: String, to: String): List<TicketDto> {
+        return api.getFilteredTickets(from, to)
+    }
 }

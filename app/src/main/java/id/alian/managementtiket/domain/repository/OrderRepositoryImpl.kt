@@ -26,8 +26,8 @@ class OrderRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun orderDetail(token: String): List<OrderDetailDto> {
-        return api.orderDetail("Bearer $token")
+    override suspend fun orderDetail(token: String, orderId: Int): OrderDetailDto {
+        return api.orderDetail("Bearer $token", orderId)
     }
 
 

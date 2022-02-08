@@ -1,6 +1,7 @@
 package id.alian.managementtiket.presentation.tickets.fragments
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -25,11 +26,11 @@ class DetailTicketFragment :
     @SuppressLint("SetTextI18n")
     override fun FragmentDetailTicketBinding.initialize() {
         requireActivity().runOnUiThread {
-            binding.tvTicketTo.text = "To : ${args.ticketDetail?.to}"
-            binding.tvTicketFrom.text = "From : ${args.ticketDetail?.from}"
-            binding.tvTicketTime.text = "Time : ${args.ticketDetail?.time}"
-            binding.tvTicketPrice.text = "Price : $ ${args.ticketDetail?.price}"
-            binding.tvTicketStock.text = "Stock : ${args.ticketDetail?.ticket_stock}"
+            binding.tvTicketTo.text = "Dari : ${args.ticketDetail?.to}"
+            binding.tvTicketFrom.text = "Tujuan : ${args.ticketDetail?.from}"
+            binding.tvTicketTime.text = "Waktu keberangkatan : ${args.ticketDetail?.time}"
+            binding.tvTicketPrice.text = "Harga : Rp. ${args.ticketDetail?.price}"
+            binding.tvTicketStock.text = "Stok tiket : ${args.ticketDetail?.ticket_stock}"
 
             viewModel.ticketCount.observe(viewLifecycleOwner) {
                 binding.tvTicketCountUser.text = it.toString()
@@ -69,7 +70,7 @@ class DetailTicketFragment :
                             binding.btnBuy.text = resources.getString(R.string.text_order_button)
                             binding.btnBuy.enable()
                             binding.root.showShortSnackBarWithAction(
-                                message = "Berhasil ditambahkan ke keranjang",
+                                message = "Berhasil ditambahkan ke order",
                                 actionLabel = resources.getString(R.string.ok),
                                 block = {
                                     requireActivity().openActivity(OrderActivity::class.java)

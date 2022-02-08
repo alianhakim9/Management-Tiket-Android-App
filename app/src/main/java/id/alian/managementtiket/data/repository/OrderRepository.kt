@@ -13,5 +13,5 @@ interface OrderRepository {
         price: Int
     ): CreateOrderPaymentDto
 
-    suspend fun orderDetail(token: String): List<OrderDetailDto>
+    suspend fun orderDetail(token: String, orderId: Int): OrderDetailDto
 }

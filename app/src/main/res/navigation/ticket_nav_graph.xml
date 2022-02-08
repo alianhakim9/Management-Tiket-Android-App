@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ticket_nav_graph"
-    app:startDestination="@id/ticketDashboardFragment">
+    app:startDestination="@id/ticketListFragment">
 
     <fragment
         android:id="@+id/ticketDashboardFragment"
@@ -22,11 +22,6 @@
         <action
             android:id="@+id/action_ticketListFragment_to_detailTicketFragment"
             app:destination="@id/detailTicketFragment" />
-        <action
-            android:id="@+id/action_ticketListFragment_to_ticketDashboardFragment"
-            app:destination="@id/ticketDashboardFragment"
-            app:popUpTo="@id/ticket_nav_graph"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/detailTicketFragment"

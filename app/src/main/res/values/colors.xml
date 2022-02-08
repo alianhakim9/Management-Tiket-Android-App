@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="error_red">#ff3333</color>
     <color name="success">#22bb33</color>
+    <color name="primary900">#202445</color>
+    <color name="secondary200">#ffda84</color>
+    <color name="secondary500">#7fb9c5</color>
 </resources>

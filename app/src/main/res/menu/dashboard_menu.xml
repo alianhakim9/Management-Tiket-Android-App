@@ -9,11 +9,11 @@
         android:title="Order"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/profile"
-        android:contentDescription="Profile"
-        android:title="Profil"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/profile"-->
+<!--        android:contentDescription="Profile"-->
+<!--        android:title="Profil"-->
+<!--        app:showAsAction="never" />-->
 
     <item
         android:id="@+id/logout"

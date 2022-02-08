@@ -3,20 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_nav_graph"
-    app:startDestination="@id/userDashboardFragment">
-    <fragment
-        android:id="@+id/listUserFragment"
-        android:name="id.alian.managementtiket.presentation.users.fragments.ListUserFragment"
-        android:label="fragment_list_user"
-        tools:layout="@layout/fragment_list_user" />
+    app:startDestination="@id/userProfileFragment">
+
     <fragment
         android:id="@+id/userDashboardFragment"
         android:name="id.alian.managementtiket.presentation.users.fragments.UserDashboardFragment"
         android:label="fragment_user_dashboard"
         tools:layout="@layout/fragment_user_dashboard">
-        <action
-            android:id="@+id/action_userDashboardFragment_to_listUserFragment"
-            app:destination="@id/listUserFragment" />
+
         <action
             android:id="@+id/action_userDashboardFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />

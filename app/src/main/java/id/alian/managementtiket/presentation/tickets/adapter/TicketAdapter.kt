@@ -56,11 +56,11 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>(), Filterab
             }
         }
 
-        holder.binding.tvTicketFrom.text = "From : ${tickets.from}"
-        holder.binding.tvTicketTo.text = "To : ${tickets.to}"
-        holder.binding.tvTicketTime.text = "Time : ${tickets.time}"
-        holder.binding.tvTicketPrice.text = "Price :$ ${tickets.price}"
-        holder.binding.tvTicketStock.text = "Stok : ${tickets.ticket_stock}"
+        holder.binding.tvTicketFrom.text = "Dari : ${tickets.from}"
+        holder.binding.tvTicketTo.text = "Tujuan : ${tickets.to}"
+        holder.binding.tvTicketTime.text = "Waktu Keberangkatan : ${tickets.time}"
+        holder.binding.tvTicketPrice.text = "Harga Tiket : Rp. ${tickets.price}"
+        holder.binding.tvTicketStock.text = "Stok Tiket : ${tickets.ticket_stock}"
     }
 
     override fun getItemCount(): Int {

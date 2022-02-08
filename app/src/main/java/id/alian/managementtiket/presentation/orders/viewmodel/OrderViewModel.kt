@@ -31,18 +31,17 @@ class OrderViewModel @Inject constructor(
     private val _createOrderState = MutableSharedFlow<Resource<CreateOrderPaymentDto>>()
     val createOrderPaymentState: SharedFlow<Resource<CreateOrderPaymentDto>> = _createOrderState
 
-    private val _orderDetailState = MutableSharedFlow<Resource<List<OrderDetailDto>>>()
-    val orderDetailState: SharedFlow<Resource<List<OrderDetailDto>>> = _orderDetailState
+    private val _orderDetailState = MutableSharedFlow<Resource<OrderDetailDto>>()
+    val orderDetailState: SharedFlow<Resource<OrderDetailDto>> = _orderDetailState
 
     private var _ticketCount = MutableLiveData<Int>(0)
     val ticketCount: LiveData<Int> = _ticketCount
 
     init {
         getOrders()
-        orderDetail()
     }
 
-    private fun getOrders() {
+    fun getOrders() {
         getOrderUseCase().onEach { result ->
             _orderListState.emit(result)
         }.launchIn(viewModelScope)
@@ -58,8 +57,8 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    fun orderDetail() {
-        orderDetailUseCase().onEach { result ->
+    fun orderDetail(orderId: Int) {
+        orderDetailUseCase(orderId).onEach { result ->
             _orderDetailState.emit(result)
         }.launchIn(viewModelScope)
     }
