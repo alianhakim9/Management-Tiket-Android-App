@@ -3,26 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ticket_nav_graph"
-    app:startDestination="@id/ticketListFragment">
+    app:startDestination="@id/listTicketFragment">
 
-    <fragment
-        android:id="@+id/ticketDashboardFragment"
-        android:name="id.alian.managementtiket.presentation.tickets.fragments.TicketDashboardFragment"
-        android:label="fragment_ticket_dashboard"
-        tools:layout="@layout/fragment_ticket_dashboard">
-        <action
-            android:id="@+id/action_ticketDashboardFragment_to_ticketListFragment"
-            app:destination="@id/ticketListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ticketListFragment"
-        android:name="id.alian.managementtiket.presentation.tickets.fragments.ListTicketFragment"
-        android:label="fragment_ticket_list"
-        tools:layout="@layout/fragment_list_ticket">
-        <action
-            android:id="@+id/action_ticketListFragment_to_detailTicketFragment"
-            app:destination="@id/detailTicketFragment" />
-    </fragment>
     <fragment
         android:id="@+id/detailTicketFragment"
         android:name="id.alian.managementtiket.presentation.tickets.fragments.DetailTicketFragment"
@@ -34,10 +16,27 @@
             app:argType="id.alian.managementtiket.domain.model.Ticket"
             app:nullable="true" />
         <action
-            android:id="@+id/action_detailTicketFragment_to_ticketListFragment"
-            app:destination="@id/ticketListFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/ticketListFragment"
+            android:id="@+id/action_detailTicketFragment_to_listTicketPaginationFragment"
+            app:destination="@id/listTicketFragment"
+            app:popUpTo="@id/ticket_nav_graph"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/listTicketFragment"
+        android:name="id.alian.managementtiket.presentation.tickets.fragments.ListTicketFragment"
+        android:label="fragment_list_ticket_pagination"
+        tools:layout="@layout/fragment_list_ticket_pagination" >
+        <action
+            android:id="@+id/action_listTicketPaginationFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchTicketFragment"
+        android:name="id.alian.managementtiket.presentation.tickets.fragments.SearchTicketFragment"
+        android:label="fragment_search_ticket"
+        tools:layout="@layout/fragment_search_ticket" >
+        <action
+            android:id="@+id/action_searchTicketFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
     </fragment>
 </navigation>

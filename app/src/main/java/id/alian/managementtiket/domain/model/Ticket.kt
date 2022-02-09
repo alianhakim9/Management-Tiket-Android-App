@@ -2,6 +2,7 @@ package id.alian.managementtiket.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 @Parcelize
 data class Ticket(
@@ -11,4 +12,4 @@ data class Ticket(
     val ticket_stock: String,
     val time: String,
     val to: String,
-) : Parcelable
+) : Parcelable, Serializable

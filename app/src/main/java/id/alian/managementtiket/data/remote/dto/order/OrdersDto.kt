@@ -1,6 +1,5 @@
 package id.alian.managementtiket.data.remote.dto.order
 
-import id.alian.managementtiket.data.remote.dto.ticket.TicketDto
 import id.alian.managementtiket.data.remote.dto.user.UserDto
 import id.alian.managementtiket.domain.model.Order
 import id.alian.managementtiket.domain.model.Ticket
@@ -16,7 +15,7 @@ data class OrdersDto(
     val created_at: String,
     val updated_at: String,
     val users: UserDto,
-    val ticket: TicketDto
+    val ticket: Ticket
 )
 
 fun OrdersDto.toUser(): User {

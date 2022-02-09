@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/listTicketFragment"
+        android:enabled="true"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_home"
+        android:title="Tiket" />
+    <item
+        android:id="@+id/searchTicketFragment"
+        android:enabled="true"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
+        android:title="Cari Tiket" />
+</menu>

@@ -26,68 +26,73 @@ class DetailTicketFragment :
     @SuppressLint("SetTextI18n")
     override fun FragmentDetailTicketBinding.initialize() {
         requireActivity().runOnUiThread {
-            binding.tvTicketTo.text = "Dari : ${args.ticketDetail?.to}"
-            binding.tvTicketFrom.text = "Tujuan : ${args.ticketDetail?.from}"
-            binding.tvTicketTime.text = "Waktu keberangkatan : ${args.ticketDetail?.time}"
-            binding.tvTicketPrice.text = "Harga : Rp. ${args.ticketDetail?.price}"
-            binding.tvTicketStock.text = "Stok tiket : ${args.ticketDetail?.ticket_stock}"
+            with(binding) {
+                tvTicketTo.text = "Dari : ${args.ticketDetail?.to}"
+                tvTicketFrom.text = "Tujuan : ${args.ticketDetail?.from}"
+                tvTicketTime.text = "Waktu keberangkatan : ${args.ticketDetail?.time}"
+                tvTicketPrice.text = "Harga : Rp. ${args.ticketDetail?.price}"
+                tvTicketStock.text = "Stok tiket : ${args.ticketDetail?.ticket_stock}"
 
-            viewModel.ticketCount.observe(viewLifecycleOwner) {
-                binding.tvTicketCountUser.text = it.toString()
-            }
+                with(viewModel) {
+                    ticketCount.observe(viewLifecycleOwner) {
+                        tvTicketCountUser.text = it.toString()
+                    }
 
-            binding.btnDecrease.setOnClickListener {
-                viewModel.decreaseCount()
-            }
+                    btnDecrease.setOnClickListener {
+                        decreaseCount()
+                    }
 
-            binding.btnIncrease.setOnClickListener {
-                viewModel.increaseCount()
-            }
+                    btnIncrease.setOnClickListener {
+                        increaseCount()
+                    }
 
-            binding.btnBuy.setOnClickListener {
-                viewModel.createOrder(
-                    ticketId = args.ticketDetail?.id!!,
-                    ticketCount = binding.tvTicketCountUser.text.toString().toInt(),
-                    price = args.ticketDetail?.price.toString().toInt()
-                )
-            }
+                    btnBuy.setOnClickListener {
+                        createOrder(
+                            ticketId = args.ticketDetail?.id!!,
+                            ticketCount = tvTicketCountUser.text.toString().toInt(),
+                            price = args.ticketDetail?.price.toString().toInt()
+                        )
+                    }
 
-            binding.topAppBar.setNavigationOnClickListener {
-                findNavController().navigate(
-                    DetailTicketFragmentDirections.actionDetailTicketFragmentToTicketListFragment()
-                )
-            }
+                    topAppBar.setNavigationOnClickListener {
+                        findNavController().navigate(
+                            DetailTicketFragmentDirections.actionDetailTicketFragmentToListTicketPaginationFragment()
+                        )
+                    }
 
-            lifecycleScope.launchWhenCreated {
-                viewModel.createOrderPaymentState.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            binding.btnBuy.text = resources.getString(R.string.is_order_button)
-                            binding.btnBuy.disable()
-                        }
+                    lifecycleScope.launchWhenCreated {
+                        createOrderPaymentState.collectLatest {
+                            when (it) {
+                                is Resource.Loading -> {
+                                    btnBuy.text = resources.getString(R.string.is_order_button)
+                                    btnBuy.disable()
+                                }
 
-                        is Resource.Success -> {
-                            binding.btnBuy.text = resources.getString(R.string.text_order_button)
-                            binding.btnBuy.enable()
-                            binding.root.showShortSnackBarWithAction(
-                                message = "Berhasil ditambahkan ke order",
-                                actionLabel = resources.getString(R.string.ok),
-                                block = {
-                                    requireActivity().openActivity(OrderActivity::class.java)
-                                },
-                                colorHex = requireContext().getColorCompat(R.color.success),
-                                actionLabelColor = requireContext().getColorCompat(R.color.white)
-                            )
-                        }
+                                is Resource.Success -> {
+                                    btnBuy.text =
+                                        resources.getString(R.string.text_order_button)
+                                    btnBuy.enable()
+                                    root.showShortSnackBarWithAction(
+                                        message = "Berhasil ditambahkan ke order",
+                                        actionLabel = resources.getString(R.string.ok),
+                                        block = {
+                                            requireActivity().openActivity(OrderActivity::class.java)
+                                        },
+                                        colorHex = requireContext().getColorCompat(R.color.success),
+                                        actionLabelColor = requireContext().getColorCompat(R.color.white)
+                                    )
+                                }
 
-                        is Resource.Error -> {
-                            binding.btnBuy.text = resources.getString(R.string.text_order_button)
-                            binding.btnBuy.enable()
-                            binding.root.showShortSnackBar(
-                                message = it.message!!,
-                                colorHex = requireContext().getColorCompat(R.color.error_red)
-                            )
-
+                                is Resource.Error -> {
+                                    btnBuy.text =
+                                        resources.getString(R.string.text_order_button)
+                                    btnBuy.enable()
+                                    root.showShortSnackBar(
+                                        message = it.message!!,
+                                        colorHex = requireContext().getColorCompat(R.color.error_red)
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -99,7 +104,7 @@ class DetailTicketFragment :
                 override fun handleOnBackPressed() {
                     // Handle the back button event
                     findNavController().navigate(
-                        DetailTicketFragmentDirections.actionDetailTicketFragmentToTicketListFragment()
+                        DetailTicketFragmentDirections.actionDetailTicketFragmentToListTicketPaginationFragment()
                     )
                 }
             }

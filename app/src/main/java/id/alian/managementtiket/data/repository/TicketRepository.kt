@@ -1,8 +1,7 @@
 package id.alian.managementtiket.data.repository
 
-import id.alian.managementtiket.data.remote.dto.ticket.TicketDto
+import id.alian.managementtiket.data.remote.dto.ticket.TicketsResponse
 
 interface TicketRepository {
-    suspend fun getTickets(): List<TicketDto>
-    suspend fun getFilteredTickets(from: String, to: String): List<TicketDto>
+    suspend fun getTickets(page: Int): TicketsResponse
 }

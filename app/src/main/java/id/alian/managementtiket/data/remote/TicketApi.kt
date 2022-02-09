@@ -6,7 +6,7 @@ import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.remote.dto.order.OrderDetailDto
 import id.alian.managementtiket.data.remote.dto.order.OrdersDto
 import id.alian.managementtiket.data.remote.dto.payment.PaymentDto
-import id.alian.managementtiket.data.remote.dto.ticket.TicketDto
+import id.alian.managementtiket.data.remote.dto.ticket.TicketsResponse
 import id.alian.managementtiket.data.remote.dto.user.UserDto
 import id.alian.managementtiket.domain.model.User
 import retrofit2.http.*
@@ -36,13 +36,9 @@ interface TicketApi {
 
     // ticket
     @GET("ticket/list-get")
-    suspend fun getTickets(): List<TicketDto>
-
-    @GET("ticket/list-get")
-    suspend fun getFilteredTickets(
-        @Query("from") from: String,
-        @Query("to") to: String
-    ): List<TicketDto>
+    suspend fun getTickets(
+        @Query("page") page: Int
+    ): TicketsResponse
 
     @FormUrlEncoded
     @POST("auth/user/order-ticket/create")
