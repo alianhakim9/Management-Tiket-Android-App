@@ -11,4 +11,8 @@ class TicketRepositoryImpl @Inject constructor(
     override suspend fun getTickets(page: Int): TicketsResponse {
         return api.getTickets(page)
     }
+
+    override suspend fun searchTicket(from: String, to: String): TicketsResponse {
+        return api.searchTicket(from, to)
+    }
 }

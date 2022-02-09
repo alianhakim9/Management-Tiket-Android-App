@@ -1,20 +1,16 @@
 package id.alian.managementtiket.presentation.tickets.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import id.alian.managementtiket.databinding.ItemTicketLayoutBinding
 import id.alian.managementtiket.domain.model.Ticket
 
-class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>(), Filterable {
+class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
     class ViewHolder(val binding: ItemTicketLayoutBinding) : RecyclerView.ViewHolder(binding.root)
-
 
     private val differCallback = object : DiffUtil.ItemCallback<Ticket>() {
         override fun areItemsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
@@ -56,11 +52,13 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>(), Filterab
             }
         }
 
-        holder.binding.tvTicketFrom.text = "Dari : ${tickets.from}"
-        holder.binding.tvTicketTo.text = "Tujuan : ${tickets.to}"
-        holder.binding.tvTicketTime.text = "Waktu Keberangkatan : ${tickets.time}"
-        holder.binding.tvTicketPrice.text = "Harga Tiket : Rp. ${tickets.price}"
-        holder.binding.tvTicketStock.text = "Stok Tiket : ${tickets.ticket_stock}"
+        with(holder.binding) {
+            tvTicketFrom.text = "Dari : ${tickets.from}"
+            tvTicketTo.text = "Tujuan : ${tickets.to}"
+            tvTicketTime.text = "Waktu Keberangkatan : ${tickets.time}"
+            tvTicketPrice.text = "Harga Tiket : Rp. ${tickets.price}"
+            tvTicketStock.text = "Stok Tiket : ${tickets.ticket_stock}"
+        }
     }
 
     override fun getItemCount(): Int {
@@ -71,31 +69,5 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>(), Filterab
 
     fun setOnItemClickListener(listener: (Ticket) -> Unit) {
         onItemClickListener = listener
-    }
-
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
-                    Log.d("TicketAdapter", "performFiltering: Empty")
-                } else {
-                    val resultList = ArrayList<Ticket>()
-                    for (row in differ.currentList) {
-                        Log.d("TicketAdapter", "performFiltering: $row")
-                    }
-                    countryFilterList = resultList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = countryFilterList
-                return filterResults
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(p0: CharSequence?, result: FilterResults?) {
-                countryFilterList = result?.values as ArrayList<Ticket>
-                notifyDataSetChanged()
-            }
-        }
     }
 }

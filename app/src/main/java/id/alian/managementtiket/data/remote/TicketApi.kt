@@ -40,6 +40,13 @@ interface TicketApi {
         @Query("page") page: Int
     ): TicketsResponse
 
+    @GET("ticket/list-get")
+    suspend fun searchTicket(
+        @Query("from") from: String,
+        @Query("to") to: String
+    ): TicketsResponse
+
+    // order
     @FormUrlEncoded
     @POST("auth/user/order-ticket/create")
     suspend fun createTicketOrder(
