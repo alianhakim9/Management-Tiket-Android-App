@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.repository.TicketRepository
 import id.alian.managementtiket.domain.model.Ticket
-import id.alian.managementtiket.domain.use_case.tickets.get_tickets_pagination.TicketPagingSource
+import id.alian.managementtiket.domain.use_case.tickets.get_tickets.TicketPagingSource
 import id.alian.managementtiket.domain.use_case.tickets.search_ticket.SearchTicketUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

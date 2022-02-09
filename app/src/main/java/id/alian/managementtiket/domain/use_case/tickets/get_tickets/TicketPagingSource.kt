@@ -1,4 +1,4 @@
-package id.alian.managementtiket.domain.use_case.tickets.get_tickets_pagination
+package id.alian.managementtiket.domain.use_case.tickets.get_tickets
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
