@@ -47,35 +47,37 @@ class OrderAdapter @Inject constructor(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orders = differ.currentList[position]
-        holder.binding.tvTicketFrom.text = "Dari : ${orders.ticket.from}"
-        holder.binding.tvTicketTo.text = "Tujuan : ${orders.ticket.to}"
-        holder.binding.tvTicketTime.text = "Waktu Keberangkatan : ${orders.ticket.time}"
-        holder.binding.tvTicketPrice.text = "Harga Tiket : Rp ${orders.price}"
-        holder.binding.tvTicketCount.text = "Jumlah Tiket : ${orders.ticket_count}"
+        with(holder.binding) {
+            tvTicketFrom.text = "Dari : ${orders.ticket.from}"
+            tvTicketTo.text = "Tujuan : ${orders.ticket.to}"
+            tvTicketTime.text = "Waktu Keberangkatan : ${orders.ticket.time}"
+            tvTicketPrice.text = "Harga Tiket : Rp ${orders.price}"
+            tvTicketCount.text = "Jumlah Tiket : ${orders.ticket_count}"
 
-        if (orders.status != "0") {
-            holder.binding.tvTicketStatus.text = "Sudah Dibayar"
-            holder.binding.tvTicketStatus.setTextColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.primary900
+            if (orders.status != "0") {
+                tvTicketStatus.text = "Sudah Dibayar"
+                tvTicketStatus.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.primary900
+                    )
                 )
-            )
-            holder.binding.btnCheckout.remove()
-            holder.binding.btnOrderDetail.show()
-            holder.binding.btnOrderDetail.setOnClickListener {
-                detailOrderListener?.let {
-                    it(orders)
+                btnCheckout.remove()
+                btnOrderDetail.show()
+                btnOrderDetail.setOnClickListener {
+                    detailOrderListener?.let {
+                        it(orders)
+                    }
                 }
-            }
-        } else {
-            holder.binding.tvTicketStatus.text = "Belum Dibayar"
-            holder.binding.tvTicketStatus.setTextColor(RED)
-            holder.binding.btnCheckout.show()
-            holder.binding.btnOrderDetail.remove()
-            holder.binding.btnCheckout.setOnClickListener {
-                onItemClickListener?.let {
-                    it(orders)
+            } else {
+                tvTicketStatus.text = "Belum Dibayar"
+                tvTicketStatus.setTextColor(RED)
+                btnCheckout.show()
+                btnOrderDetail.remove()
+                btnCheckout.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(orders)
+                    }
                 }
             }
         }

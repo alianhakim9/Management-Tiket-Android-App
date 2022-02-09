@@ -1,6 +1,9 @@
 package id.alian.managementtiket.domain.use_case.orders.create_order
 
 import android.util.Log
+import id.alian.managementtiket.commons.Constants
+import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.repository.OrderRepository
@@ -20,7 +23,7 @@ class CreateOrderUseCase @Inject constructor(
         ticketCount: Int,
         price: Int
     ): Flow<Resource<CreateOrderPaymentDto>> = flow {
-        try {
+        val unit = try {
             emit(Resource.Loading<CreateOrderPaymentDto>())
             dataStoreUseCase.getToken()?.let {
                 val order = repository.createOrder(
@@ -31,12 +34,12 @@ class CreateOrderUseCase @Inject constructor(
         } catch (e: HttpException) {
             emit(
                 Resource.Error<CreateOrderPaymentDto>(
-                    e.localizedMessage ?: "an unexpected error occurred"
+                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
                 )
             )
         } catch (e: IOException) {
             Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<CreateOrderPaymentDto>("couldn't reach server. Check your internet connection"))
+            emit(Resource.Error<CreateOrderPaymentDto>(ERROR_MESSAGE))
         }
     }
 }

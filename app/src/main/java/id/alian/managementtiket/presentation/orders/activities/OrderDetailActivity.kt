@@ -26,60 +26,66 @@ class OrderDetailActivity : AppCompatActivity() {
         binding = ActivityOrderDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val order = intent.getSerializableExtra("order") as? Order
-        order?.id?.let {
-            viewModel.orderDetail(
-                orderId = it
-            )
-        }
+        with(binding) {
+            val order = intent.getSerializableExtra("order") as? Order
+            order?.id?.let {
+                viewModel.orderDetail(
+                    orderId = it
+                )
+            }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.orderDetailState.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
+            lifecycleScope.launchWhenStarted {
+                viewModel.orderDetailState.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
 
-                    is Resource.Success -> {
-                        hideLoading()
-                        binding.tvFrom.text = "Dari : ${it.data?.from}"
-                        binding.tvTo.text = "Tujuan : ${it.data?.to}"
-                        binding.tvBankId.text = "Kode Bank : ${it.data?.bank_id}"
-                        binding.tvCodeFixed.text = "Kode Tiket : ${it.data?.code_fixed}"
-                        binding.tvName.text = it.data?.name
-                        binding.tvSumPrice.text = "Harga : Rp. ${it.data?.sum_price}"
-                        binding.tvTime.text = "Waktu : ${it.data?.time}"
-                        binding.tvTicketCount.text =
-                            "Jumlah Tiket : ${it.data?.ticket_count}"
-                        binding.tvTicketCode.text = it.data?.code_fixed
-                    }
+                        is Resource.Success -> {
+                            hideLoading()
+                            tvFrom.text = "Dari : ${it.data?.from}"
+                            tvTo.text = "Tujuan : ${it.data?.to}"
+                            tvBankId.text = "Kode Bank : ${it.data?.bank_id}"
+                            tvCodeFixed.text = "Kode Tiket : ${it.data?.code_fixed}"
+                            tvName.text = it.data?.name
+                            tvSumPrice.text = "Harga : Rp. ${it.data?.sum_price}"
+                            tvTime.text = "Waktu : ${it.data?.time}"
+                            tvTicketCount.text =
+                                "Jumlah Tiket : ${it.data?.ticket_count}"
+                            tvTicketCode.text = it.data?.code_fixed
+                        }
 
-                    is Resource.Error -> {
-                        hideLoading()
-                        binding.root.showShortSnackBar(
-                            message = it.message!!,
-                            colorHex = getColorCompat(R.color.error_red)
-                        )
+                        is Resource.Error -> {
+                            hideLoading()
+                            root.showShortSnackBar(
+                                message = it.message!!,
+                                colorHex = getColorCompat(R.color.error_red)
+                            )
+                        }
                     }
                 }
             }
-        }
 
-        binding.topAppBar.setNavigationOnClickListener {
-            finish()
+            topAppBar.setNavigationOnClickListener {
+                finish()
+            }
         }
     }
 
 
     private fun showLoading() {
-        binding.linearProgressIndicator.show()
-        binding.cardView.remove()
+        with(binding) {
+            linearProgressIndicator.show()
+            cardView.remove()
+        }
     }
 
     private fun hideLoading() {
-        binding.linearProgressIndicator.remove()
-        binding.cardView.show()
-        binding.imgBarcode.show()
-        binding.tvTicketCode.show()
+        with(binding) {
+            linearProgressIndicator.remove()
+            cardView.show()
+            imgBarcode.show()
+            tvTicketCode.show()
+        }
     }
 }

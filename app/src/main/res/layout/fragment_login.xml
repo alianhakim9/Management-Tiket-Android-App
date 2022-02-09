@@ -16,10 +16,10 @@
 
         <TextView
             android:id="@+id/title_login"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_login_title"
-            android:textSize="20sp"
+            android:text="@string/title_login_page"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:saveEnabled="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +57,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
+                android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:saveEnabled="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:enabled="false"
-            android:text="@string/text_login_button"
+            android:text="@string/btn_login"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -80,7 +80,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_register_button"
+            android:text="@string/btn_register"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

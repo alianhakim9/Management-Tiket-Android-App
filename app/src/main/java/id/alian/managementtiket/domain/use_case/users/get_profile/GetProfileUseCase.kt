@@ -1,6 +1,9 @@
 package id.alian.managementtiket.domain.use_case.users.get_profile
 
 import android.util.Log
+import id.alian.managementtiket.commons.Constants
+import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.user.toUser
 import id.alian.managementtiket.data.repository.UserRepository
@@ -27,12 +30,12 @@ class GetProfileUseCase @Inject constructor(
         } catch (e: HttpException) {
             emit(
                 Resource.Error<User>(
-                    e.localizedMessage ?: "an unexpected error occurred"
+                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
                 )
             )
         } catch (e: IOException) {
             Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<User>("Could'n reach server. Check your internet connection"))
+            emit(Resource.Error<User>(ERROR_MESSAGE))
         }
     }
 }

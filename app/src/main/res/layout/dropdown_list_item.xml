@@ -6,7 +6,7 @@
     android:ellipsize="end"
     android:maxLines="1"
     android:padding="16dp"
-    android:text="BCA"
+    android:text="@string/label_dummy_bank_item"
     android:textAppearance="?attr/textAppearanceSubtitle1"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/textView7"

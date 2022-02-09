@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
@@ -29,84 +28,88 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val order = intent.getSerializableExtra("order") as? Order
-        setupOrderTicketView(order!!)
-
-        binding.bankMenu.remove()
-        binding.etUserBankCode.remove()
-        binding.etUserBankCode.editText?.addTextChangedListener(paymentTextWatcher)
-
         val banks = listOf("BCA", "Mandiri", "Muamalat", "Mandiri Syari'ah")
         val adapter = ArrayAdapter(this, R.layout.dropdown_list_item, banks)
         val autoCompleteTextView = (binding.bankMenu.editText as? AutoCompleteTextView)
-        binding.rbPaymentMethod.setOnCheckedChangeListener { _, i ->
-            when (i) {
-                R.id.bank -> {
-                    binding.bankMenu.show()
-                    binding.etUserBankCode.show()
-                    autoCompleteTextView?.setAdapter(adapter)
-                }
-            }
-        }
 
-        binding.btnPay.setOnClickListener {
-            viewModel.addPayment(
-                orderId = order.id,
-                bankId = autoCompleteTextView?.text.toString(),
-                userBankCode = binding.etUserBankCode.editText?.text.toString()
-            )
-        }
+        with(binding) {
+            val order = intent.getSerializableExtra("order") as? Order
+            setupOrderTicketView(order!!)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.addPaymentState.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.btnPay.disable()
-                        binding.btnPay.text = resources.getString(R.string.is_payment_button)
-                    }
+            bankMenu.remove()
+            etUserBankCode.remove()
+            etUserBankCode.editText?.addTextChangedListener(paymentTextWatcher)
 
-                    is Resource.Success -> {
-                        binding.btnPay.enable()
-                        binding.btnPay.text = resources.getString(R.string.text_payment_button)
-                        binding.root.showShortSnackBarWithAction(
-                            message = "Pembayaran berhasil",
-                            actionLabel = "Detail Order",
-                            block = {
-                                openActivity(OrderDetailActivity::class.java, extras = {
-                                    putSerializable("order", order)
-                                })
-                                finish()
-                            },
-                            colorHex = getColorCompat(R.color.success),
-                            actionLabelColor = getColorCompat(R.color.white)
-                        )
-                    }
-
-                    is Resource.Error -> {
-                        binding.btnPay.enable()
-                        binding.btnPay.text = resources.getString(R.string.text_payment_button)
-                        binding.root.showShortSnackBar(
-                            message = resources.getString(R.string.text_failed),
-                            colorHex = getColorCompat(R.color.error_red)
-                        )
+            rbPaymentMethod.setOnCheckedChangeListener { _, i ->
+                when (i) {
+                    R.id.bank -> {
+                        bankMenu.show()
+                        etUserBankCode.show()
+                        autoCompleteTextView?.setAdapter(adapter)
                     }
                 }
             }
-        }
 
-        binding.topAppBar.setNavigationOnClickListener {
-            finish()
+            btnPay.setOnClickListener {
+                viewModel.addPayment(
+                    orderId = order.id,
+                    bankId = autoCompleteTextView?.text.toString(),
+                    userBankCode = etUserBankCode.editText?.text.toString()
+                )
+            }
+
+            lifecycleScope.launchWhenStarted {
+                viewModel.addPaymentState.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            btnPay.disable()
+                            btnPay.text = resources.getString(R.string.btn_is_payment)
+                        }
+
+                        is Resource.Success -> {
+                            btnPay.enable()
+                            btnPay.text = resources.getString(R.string.btn_pay)
+                            root.showShortSnackBarWithAction(
+                                message = "Pembayaran berhasil",
+                                actionLabel = "Detail Order",
+                                block = {
+                                    openActivity(OrderDetailActivity::class.java, extras = {
+                                        putSerializable("order", order)
+                                    })
+                                    finish()
+                                },
+                                colorHex = getColorCompat(R.color.success),
+                                actionLabelColor = getColorCompat(R.color.white)
+                            )
+                        }
+
+                        is Resource.Error -> {
+                            btnPay.enable()
+                            btnPay.text = resources.getString(R.string.btn_pay)
+                            root.showShortSnackBar(
+                                message = resources.getString(R.string.err_message),
+                                colorHex = getColorCompat(R.color.error_red)
+                            )
+                        }
+                    }
+                }
+            }
+
+            topAppBar.setNavigationOnClickListener {
+                finish()
+            }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setupOrderTicketView(order: Order) {
-        binding.tvTicketTo.text = "To : ${order.ticket.to}"
-        binding.tvTicketFrom.text = "From : ${order.ticket.from}"
-        binding.tvTicketCount.text = "Count : ${order.ticket_count}"
-        binding.tvSumPrice.text = "Rp. ${order.price}"
-        binding.tvTicketTime.text = "Time : ${order.ticket.time}"
+        with(binding) {
+            tvTicketTo.text = "To : ${order.ticket.to}"
+            tvTicketFrom.text = "From : ${order.ticket.from}"
+            tvTicketCount.text = "Count : ${order.ticket_count}"
+            tvSumPrice.text = "Rp. ${order.price}"
+            tvTicketTime.text = "Time : ${order.ticket.time}"
+        }
     }
 
     private val paymentTextWatcher: TextWatcher = object : TextWatcher {

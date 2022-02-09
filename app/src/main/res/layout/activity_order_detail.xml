@@ -59,7 +59,7 @@
                     android:id="@+id/tv_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="from"
+                    android:text="@string/label_dummy_from"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +67,7 @@
                     android:id="@+id/tv_to"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
+                    android:text="@string/label_dummy_to"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_from" />
 
@@ -75,7 +75,7 @@
                     android:id="@+id/tv_sum_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sum_price"
+                    android:text="@string/label_dummy_sum"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_to" />
 
@@ -83,7 +83,7 @@
                     android:id="@+id/tv_bank_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="bank_id"
+                    android:text="@string/label_dummy_bank_id"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_sum_price" />
 
@@ -91,7 +91,7 @@
                     android:id="@+id/tv_ticket_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ticket_count"
+                    android:text="@string/label_dummy_ticket_count"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_bank_id" />
 
@@ -99,7 +99,7 @@
                     android:id="@+id/tv_code_fixed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="code_fixed"
+                    android:text="@string/label_dummy_code_fixed"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -108,17 +108,17 @@
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time"
+                    android:text="@string/label_dummy_time"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_code_fixed" />
 
                 <TextView
                     android:id="@+id/tv_name"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="20sp"
+                    android:text="@string/label_dummy_name"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -129,7 +129,7 @@
             android:id="@+id/img_barcode"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:contentDescription="barcode"
+            android:contentDescription="@string/img_content_desc"
             android:src="@drawable/barcode_example"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,11 +139,11 @@
 
         <TextView
             android:id="@+id/tv_ticket_code"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="XXX"
-            android:textSize="20sp"
+            android:text="@string/label_dummy_code_fixed"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

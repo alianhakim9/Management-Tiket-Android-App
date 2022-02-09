@@ -1,7 +1,6 @@
 package id.alian.managementtiket.presentation.tickets.fragments
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -64,17 +63,17 @@ class DetailTicketFragment :
                         createOrderPaymentState.collectLatest {
                             when (it) {
                                 is Resource.Loading -> {
-                                    btnBuy.text = resources.getString(R.string.is_order_button)
+                                    btnBuy.text = resources.getString(R.string.btn_is_order)
                                     btnBuy.disable()
                                 }
 
                                 is Resource.Success -> {
                                     btnBuy.text =
-                                        resources.getString(R.string.text_order_button)
+                                        resources.getString(R.string.btn_order)
                                     btnBuy.enable()
                                     root.showShortSnackBarWithAction(
                                         message = "Berhasil ditambahkan ke order",
-                                        actionLabel = resources.getString(R.string.ok),
+                                        actionLabel = resources.getString(R.string.snackBar_ok),
                                         block = {
                                             requireActivity().openActivity(OrderActivity::class.java)
                                         },
@@ -85,7 +84,7 @@ class DetailTicketFragment :
 
                                 is Resource.Error -> {
                                     btnBuy.text =
-                                        resources.getString(R.string.text_order_button)
+                                        resources.getString(R.string.btn_order)
                                     btnBuy.enable()
                                     root.showShortSnackBar(
                                         message = it.message!!,

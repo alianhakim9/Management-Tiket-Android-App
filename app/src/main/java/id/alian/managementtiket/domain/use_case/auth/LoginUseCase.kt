@@ -1,6 +1,9 @@
 package id.alian.managementtiket.domain.use_case.auth
 
 import android.util.Log
+import id.alian.managementtiket.commons.Constants
+import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.commons.validateEmail
 import id.alian.managementtiket.commons.validatePasswordLength
@@ -33,13 +36,13 @@ class LoginUseCase @Inject constructor(
                         } else {
                             emit(
                                 Resource.Error<LoginDto>(
-                                    e.localizedMessage ?: "an unexpected error occurred"
+                                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
                                 )
                             )
                         }
                     } catch (e: IOException) {
                         Log.d("UseCase", "invoke: $e")
-                        emit(Resource.Error<LoginDto>("Couldn't reach server. Check your internet connection"))
+                        emit(Resource.Error<LoginDto>(ERROR_MESSAGE))
                     }
                 } else {
                     emit(Resource.Error<LoginDto>("Password minimal 8 karakter"))

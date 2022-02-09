@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="konfirmasi order dan bayar"
+            android:text="@string/payment_title_confirmation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
@@ -57,35 +57,38 @@
 
                 <TextView
                     android:id="@+id/tv_ticket_from"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From : 2020-04-15 16:26:20"
+                    android:text="@string/label_dummy_from"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_ticket_to"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To : 0521-06-24 02:34:49"
+                    android:text="@string/label_dummy_to"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_ticket_from" />
 
                 <TextView
                     android:id="@+id/tv_ticket_time"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Time : 01:36:43"
+                    android:text="@string/label_dummy_time"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_ticket_to" />
 
 
                 <TextView
                     android:id="@+id/tv_ticket_count"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Count : 748"
+                    android:text="@string/label_dummy_ticket_count"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_ticket_time" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Pilih Metode Pembayaran"
+            android:text="@string/hint_payment_method"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -119,7 +122,7 @@
                 android:id="@+id/bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transfer Bank" />
+                android:text="@string/rb_bank_transfer" />
 
         </RadioGroup>
 
@@ -129,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Pilih Bank"
+            android:hint="@string/hint_select_bank"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +141,8 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:inputType="none"
+                tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +160,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Masukan No Rekening"
+                android:hint="@string/hint_bank_code"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Total yang harus dibayar : "
+            android:text="@string/hint_total_pay"
             app:layout_constraintBottom_toTopOf="@+id/btnPay"
             app:layout_constraintStart_toStartOf="@+id/btnPay"
             app:layout_constraintTop_toBottomOf="@+id/et_user_bank_code" />
@@ -175,7 +179,7 @@
             android:id="@+id/tv_sum_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp. 400,00"
+            android:text="@string/label_dummy_price"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -187,7 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:enabled="false"
-            android:text="Bayar"
+            android:text="@string/btn_pay"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

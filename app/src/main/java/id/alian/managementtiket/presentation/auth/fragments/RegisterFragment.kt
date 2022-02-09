@@ -20,48 +20,49 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel: AuthViewModel by viewModels()
 
     override fun FragmentRegisterBinding.initialize() {
+        with(binding) {
+            etName.editText?.addTextChangedListener(registerTextWatcher)
+            etEmail.editText?.addTextChangedListener(registerTextWatcher)
+            etPassword.editText?.addTextChangedListener(registerTextWatcher)
 
-        binding.etName.editText?.addTextChangedListener(registerTextWatcher)
-        binding.etEmail.editText?.addTextChangedListener(registerTextWatcher)
-        binding.etPassword.editText?.addTextChangedListener(registerTextWatcher)
-
-        binding.btnRegister.setOnClickListener {
-            viewModel.register(
-                User(
-                    email = binding.etEmail.editText?.text.toString(),
-                    name = binding.etName.editText?.text.toString(),
-                    password = binding.etPassword.editText?.text.toString()
+            btnRegister.setOnClickListener {
+                viewModel.register(
+                    User(
+                        email = etEmail.editText?.text.toString(),
+                        name = etName.editText?.text.toString(),
+                        password = etPassword.editText?.text.toString()
+                    )
                 )
-            )
-        }
+            }
 
-        binding.btnToLogin.setOnClickListener {
-            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
-        }
+            btnToLogin.setOnClickListener {
+                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+            }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.registerState.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
+            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+                viewModel.registerState.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
 
-                    is Resource.Success -> {
-                        requireContext().openActivity(MainActivity::class.java)
-                        requireActivity().finish()
-                    }
+                        is Resource.Success -> {
+                            requireContext().openActivity(MainActivity::class.java)
+                            requireActivity().finish()
+                        }
 
-                    is Resource.Error -> {
-                        hideLoading()
-                        binding.root.showShortSnackBarWithAction(
-                            message = it.message!!,
-                            actionLabel = resources.getString(R.string.ok),
-                            block = { snackBar ->
-                                snackBar.dismiss()
-                            },
-                            colorHex = requireContext().getColorCompat(R.color.error_red),
-                            actionLabelColor = requireContext().getColorCompat(R.color.white)
-                        )
+                        is Resource.Error -> {
+                            hideLoading()
+                            root.showShortSnackBarWithAction(
+                                message = it.message!!,
+                                actionLabel = resources.getString(R.string.snackBar_ok),
+                                block = { snackBar ->
+                                    snackBar.dismiss()
+                                },
+                                colorHex = requireContext().getColorCompat(R.color.error_red),
+                                actionLabelColor = requireContext().getColorCompat(R.color.white)
+                            )
+                        }
                     }
                 }
             }
@@ -69,21 +70,25 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
     private fun showLoading() {
-        binding.btnRegister.text = resources.getString(R.string.is_register_button)
-        binding.btnRegister.disable()
-        binding.btnToLogin.disable()
-        binding.etName.disable()
-        binding.etEmail.disable()
-        binding.etPassword.disable()
+        with(binding) {
+            btnRegister.text = resources.getString(R.string.btn_is_register)
+            btnRegister.disable()
+            btnToLogin.disable()
+            etName.disable()
+            etEmail.disable()
+            etPassword.disable()
+        }
     }
 
     private fun hideLoading() {
-        binding.btnRegister.text = resources.getString(R.string.text_register_button)
-        binding.btnRegister.enable()
-        binding.btnToLogin.enable()
-        binding.etName.enable()
-        binding.etEmail.enable()
-        binding.etPassword.enable()
+        with(binding) {
+            btnRegister.text = resources.getString(R.string.btn_register)
+            btnRegister.enable()
+            btnToLogin.enable()
+            etName.enable()
+            etEmail.enable()
+            etPassword.enable()
+        }
     }
 
     private val registerTextWatcher: TextWatcher = object : TextWatcher {
@@ -92,11 +97,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            val name = binding.etName.editText?.text.toString().trim()
-            val email = binding.etEmail.editText?.text.toString().trim()
-            val password = binding.etPassword.editText?.text.toString().trim()
-            binding.btnRegister.isEnabled =
-                name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()
+            with(binding) {
+                val name = etName.editText?.text.toString().trim()
+                val email = etEmail.editText?.text.toString().trim()
+                val password = etPassword.editText?.text.toString().trim()
+
+                btnRegister.isEnabled =
+                    name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && password.length > 8
+            }
         }
 
         override fun afterTextChanged(p0: Editable?) {

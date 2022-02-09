@@ -14,6 +14,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import id.alian.managementtiket.commons.Constants.PREFERENCES_NAME
+import kotlin.reflect.KClass
 
 // auth validation
 fun validateEmail(email: String): Boolean {
@@ -129,3 +130,14 @@ fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
 
 // color
 fun Context.getColorCompat(id: Int) = ContextCompat.getColor(this, id)
+
+fun <T : Throwable> (() -> Unit).catch(
+    vararg exceptions: KClass<out T>,
+    catchBlock: (Throwable) -> Unit
+) {
+    try {
+        this()
+    } catch (e: Throwable) {
+        if (e::class in exceptions) catchBlock(e) else throw e
+    }
+}

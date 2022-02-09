@@ -1,6 +1,9 @@
 package id.alian.managementtiket.domain.use_case.payment.add_payment
 
 import android.util.Log
+import id.alian.managementtiket.commons.Constants
+import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.repository.PaymentRepository
@@ -35,12 +38,12 @@ class AddPaymentUseCase @Inject constructor(
             } catch (e: HttpException) {
                 emit(
                     Resource.Error<CreateOrderPaymentDto>(
-                        e.localizedMessage ?: "an unexpected error occurred"
+                        e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
                     )
                 )
             } catch (e: IOException) {
                 Log.d("UseCase", "invoke: $e")
-                emit(Resource.Error<CreateOrderPaymentDto>("Could'n reach server. Check your internet connection"))
+                emit(Resource.Error<CreateOrderPaymentDto>(ERROR_MESSAGE))
             }
         }
 }

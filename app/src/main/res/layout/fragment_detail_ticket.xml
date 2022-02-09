@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="From : 2020-04-15 16:26:20"
+        android:text="@string/label_dummy_from"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
@@ -39,7 +39,7 @@
         android:id="@+id/tv_ticket_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To : 0521-06-24 02:34:49"
+        android:text="@string/label_dummy_to"
         app:layout_constraintStart_toStartOf="@+id/tv_ticket_from"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_from" />
 
@@ -47,7 +47,7 @@
         android:id="@+id/tv_ticket_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time : 01:36:43"
+        android:text="@string/label_dummy_time"
         app:layout_constraintStart_toStartOf="@+id/tv_ticket_to"
         app:layout_constraintTop_toBottomOf="@+id/tv_ticket_to" />
 
@@ -55,21 +55,21 @@
         android:id="@+id/tv_ticket_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price : $ 5051"
+        android:text="@string/label_dummy_price"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_ticket_time"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_time" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_ticket_from" />
 
     <TextView
         android:id="@+id/tv_ticket_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:text="Stok : 265"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_price"
+        android:text="@string/label_dummy_stock"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_ticket_price" />
+        app:layout_constraintTop_toTopOf="@+id/tv_ticket_time" />
 
     <View
         android:id="@+id/view"
@@ -80,14 +80,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_price" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_ticket_stock" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Masukan jumlah tiket yang ingin dipesan"
+        android:text="@string/hint_ticket_count_order"
         app:layout_constraintBottom_toTopOf="@+id/btn_decrease"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="1"
+        android:text="@string/label_dummy_count_order"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_buy"
@@ -110,7 +110,7 @@
         android:id="@+id/btn_decrease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="decrease"
+        android:contentDescription="@string/btn_decrease"
         android:src="@drawable/ic_horizontal_line"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
         app:layout_constraintStart_toStartOf="@+id/btn_buy"
@@ -120,7 +120,7 @@
         android:id="@+id/btn_increase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="increase"
+        android:contentDescription="@string/btn_increase"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="@+id/tv_ticket_count_user"
         app:layout_constraintEnd_toEndOf="@+id/btn_buy"
@@ -130,9 +130,9 @@
         android:id="@+id/btn_buy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_order_button"
-        app:icon="@drawable/ic_add"
         android:layout_margin="10dp"
+        android:text="@string/btn_order"
+        app:icon="@drawable/ic_add"
         app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

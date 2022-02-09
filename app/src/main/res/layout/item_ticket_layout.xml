@@ -15,7 +15,7 @@
             android:id="@+id/tv_ticket_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="From : 2020-04-15 16:26:20"
+            android:text="@string/label_dummy_from"
             app:layout_constraintBottom_toTopOf="@+id/tv_ticket_to"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
-            android:text="To : 0521-06-24 02:34:49"
+            android:text="@string/label_dummy_to"
             app:layout_constraintBottom_toTopOf="@+id/tv_ticket_time"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/tv_ticket_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time : 01:36:43"
+            android:text="@string/label_dummy_time"
             app:layout_constraintBottom_toTopOf="@+id/tv_ticket_price"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,19 +40,19 @@
             android:id="@+id/tv_ticket_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price : $ 5051"
+            android:text="@string/label_dummy_price"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tv_ticket_stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stok : 265"
+            android:text="@string/label_dummy_stock"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_ticket_time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

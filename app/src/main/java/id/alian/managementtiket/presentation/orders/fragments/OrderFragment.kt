@@ -26,59 +26,61 @@ class OrderFragment :
         requireActivity().runOnUiThread {
             setupRecyclerView()
 
-            binding.topAppBar.setNavigationOnClickListener {
-                requireActivity().finish()
-            }
+            with(binding) {
+                topAppBar.setNavigationOnClickListener {
+                    requireActivity().finish()
+                }
 
-            orderAdapter.setOnItemClickListener { order ->
-                requireContext().openActivity(PaymentActivity::class.java, extras = {
-                    putSerializable("order", order)
-                })
-            }
+                orderAdapter.setOnItemClickListener { order ->
+                    requireContext().openActivity(PaymentActivity::class.java, extras = {
+                        putSerializable("order", order)
+                    })
+                }
 
-            orderAdapter.detailOrder { order ->
-                requireContext().openActivity(OrderDetailActivity::class.java, extras = {
-                    putSerializable("order", order)
-                })
-            }
+                orderAdapter.detailOrder { order ->
+                    requireContext().openActivity(OrderDetailActivity::class.java, extras = {
+                        putSerializable("order", order)
+                    })
+                }
 
-            binding.swipeUpRefresh.setOnRefreshListener {
-                viewModel.getOrders()
-            }
+                swipeUpRefresh.setOnRefreshListener {
+                    viewModel.getOrders()
+                }
 
-            lifecycleScope.launchWhenStarted {
-                viewModel.orderListState.collect {
-                    requireActivity().runOnUiThread {
-                        when (it) {
-                            is Resource.Success -> {
-                                binding.swipeUpRefresh.isRefreshing = false
-                                binding.linearProgressIndicator.remove()
-                                orderAdapter.differ.submitList(it.data)
+                lifecycleScope.launchWhenStarted {
+                    viewModel.orderListState.collect {
+                        requireActivity().runOnUiThread {
+                            when (it) {
+                                is Resource.Success -> {
+                                    swipeUpRefresh.isRefreshing = false
+                                    linearProgressIndicator.remove()
+                                    orderAdapter.differ.submitList(it.data)
+                                }
+
+                                is Resource.Error -> {
+                                    swipeUpRefresh.isRefreshing = false
+                                    linearProgressIndicator.remove()
+                                    root.showShortSnackBar(
+                                        message = it.message!!,
+                                        colorHex = requireContext().getColorCompat(R.color.error_red)
+                                    )
+                                }
+                                else -> Unit
                             }
-
-                            is Resource.Error -> {
-                                binding.swipeUpRefresh.isRefreshing = false
-                                binding.linearProgressIndicator.remove()
-                                binding.root.showShortSnackBar(
-                                    message = it.message!!,
-                                    colorHex = requireContext().getColorCompat(R.color.error_red)
-                                )
-                            }
-                            else -> Unit
                         }
                     }
                 }
             }
-
-
         }
     }
 
     private fun setupRecyclerView() {
-        binding.rvOrderList.adapter = orderAdapter
-        binding.rvOrderList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvOrderList.addItemDecoration(
-            DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
-        )
+        with(binding) {
+            rvOrderList.adapter = orderAdapter
+            rvOrderList.layoutManager = LinearLayoutManager(requireContext())
+            rvOrderList.addItemDecoration(
+                DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+            )
+        }
     }
 }

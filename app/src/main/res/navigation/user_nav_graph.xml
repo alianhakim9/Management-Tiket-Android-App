@@ -6,16 +6,6 @@
     app:startDestination="@id/userProfileFragment">
 
     <fragment
-        android:id="@+id/userDashboardFragment"
-        android:name="id.alian.managementtiket.presentation.users.fragments.UserDashboardFragment"
-        android:label="fragment_user_dashboard"
-        tools:layout="@layout/fragment_user_dashboard">
-
-        <action
-            android:id="@+id/action_userDashboardFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/userProfileFragment"
         android:name="id.alian.managementtiket.presentation.users.fragments.UserProfileFragment"
         android:label="fragment_user_profile"
