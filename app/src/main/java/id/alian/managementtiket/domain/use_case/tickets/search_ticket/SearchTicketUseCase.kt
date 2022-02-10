@@ -19,23 +19,27 @@ class SearchTicketUseCase @Inject constructor(
     private val repository: TicketRepository,
 ) {
     operator fun invoke(from: String, to: String): Flow<Resource<List<Ticket>>> = flow {
-        try {
-            emit(Resource.Loading<List<Ticket>>())
-            val tickets = repository.searchTicket(from, to)
-            if (tickets.data.isEmpty()) {
-                emit(Resource.Error("Data tidak ditemukan"))
-            } else {
-                emit(Resource.Success<List<Ticket>>(tickets.data))
-            }
-        } catch (e: HttpException) {
-            emit(
-                Resource.Error<List<Ticket>>(
-                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+        if (repository.checkConnection()) {
+            try {
+                emit(Resource.Loading<List<Ticket>>())
+                val tickets = repository.searchTicket(from, to)
+                if (tickets.data.isEmpty()) {
+                    emit(Resource.Error("Data tidak ditemukan"))
+                } else {
+                    emit(Resource.Success<List<Ticket>>(tickets.data))
+                }
+            } catch (e: HttpException) {
+                emit(
+                    Resource.Error<List<Ticket>>(
+                        e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+                    )
                 )
-            )
-        } catch (e: IOException) {
-            Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<List<Ticket>>(ERROR_MESSAGE))
+            } catch (e: IOException) {
+                Log.d("UseCase", "invoke: $e")
+                emit(Resource.Error<List<Ticket>>(ERROR_MESSAGE))
+            }
+        } else {
+            emit(Resource.Error<List<Ticket>>(ERROR_NO_INTERNET_CONNECTION))
         }
     }
 }

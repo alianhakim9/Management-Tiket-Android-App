@@ -30,32 +30,47 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesUserRepository(api: TicketApi): UserRepository {
-        return UserRepositoryImpl(api)
+    fun providesUserRepository(
+        api: TicketApi,
+        @ApplicationContext context: Context
+    ): UserRepository {
+        return UserRepositoryImpl(api, context)
     }
 
     @Provides
     @Singleton
-    fun providesTicketRepository(api: TicketApi): TicketRepository {
-        return TicketRepositoryImpl(api)
+    fun providesTicketRepository(
+        api: TicketApi,
+        @ApplicationContext context: Context
+    ): TicketRepository {
+        return TicketRepositoryImpl(api, context)
     }
 
     @Provides
     @Singleton
-    fun providesOrderRepository(api: TicketApi): OrderRepository {
-        return OrderRepositoryImpl(api)
+    fun providesOrderRepository(
+        api: TicketApi,
+        @ApplicationContext context: Context
+    ): OrderRepository {
+        return OrderRepositoryImpl(api, context)
     }
 
     @Provides
     @Singleton
-    fun providesPaymentRepository(api: TicketApi): PaymentRepository {
-        return PaymentRepositoryImpl(api)
+    fun providesPaymentRepository(
+        api: TicketApi,
+        @ApplicationContext context: Context
+    ): PaymentRepository {
+        return PaymentRepositoryImpl(api, context)
     }
 
     @Provides
     @Singleton
-    fun providesAuthRepository(api: TicketApi): AuthRepository {
-        return AuthRepositoryImpl(api)
+    fun providesAuthRepository(
+        api: TicketApi,
+        @ApplicationContext context: Context
+    ): AuthRepository {
+        return AuthRepositoryImpl(api, context)
     }
 
     @Provides

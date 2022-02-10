@@ -2,6 +2,7 @@ package id.alian.managementtiket.domain.use_case.orders.order_detail
 
 import android.util.Log
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.ERROR_NO_INTERNET_CONNECTION
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.order.OrderDetailDto
@@ -18,21 +19,25 @@ class OrderDetailUseCase @Inject constructor(
     private val dataStoreUseCase: DataStoreUseCase,
 ) {
     operator fun invoke(orderId: Int): Flow<Resource<OrderDetailDto>> = flow {
-        try {
-            emit(Resource.Loading<OrderDetailDto>())
-            dataStoreUseCase.getToken()?.let {
-                val orderDetail = repository.orderDetail(it, orderId)
-                emit(Resource.Success(orderDetail))
-            }
-        } catch (e: HttpException) {
-            emit(
-                Resource.Error<OrderDetailDto>(
-                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+        if (repository.checkConnection()) {
+            try {
+                emit(Resource.Loading<OrderDetailDto>())
+                dataStoreUseCase.getToken()?.let {
+                    val orderDetail = repository.orderDetail(it, orderId)
+                    emit(Resource.Success(orderDetail))
+                }
+            } catch (e: HttpException) {
+                emit(
+                    Resource.Error<OrderDetailDto>(
+                        e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+                    )
                 )
-            )
-        } catch (e: IOException) {
-            Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<OrderDetailDto>(ERROR_MESSAGE))
+            } catch (e: IOException) {
+                Log.d("UseCase", "invoke: $e")
+                emit(Resource.Error<OrderDetailDto>(ERROR_MESSAGE))
+            }
+        } else {
+            emit(Resource.Error<OrderDetailDto>(ERROR_NO_INTERNET_CONNECTION))
         }
     }
 }

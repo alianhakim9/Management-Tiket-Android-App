@@ -23,40 +23,43 @@ class RegisterUseCase @Inject constructor(
     private val repository: AuthRepository,
 ) {
     operator fun invoke(user: User): Flow<Resource<RegisterDto>> = flow {
-        if (user.name?.isEmpty()!!) {
-            emit(Resource.Error<RegisterDto>("Nama tidak boleh kosong"))
-        } else if (user.email?.isEmpty()!!) {
-            emit(Resource.Error<RegisterDto>(ERROR_EMAIL_EMPTY))
-        } else if (!validateEmail(email = user.email)) {
-            emit(Resource.Error<RegisterDto>(ERROR_EMAIL_VALID))
-        } else if (user.password?.isEmpty()!!) {
-            emit(Resource.Error<RegisterDto>(ERROR_PASSWORD_EMPTY))
-        } else if (!validatePasswordLength(password = user.password.length)) {
-            emit(Resource.Error<RegisterDto>(ERROR_PASSWORD_LENGTH_VALIDATE))
-        } else {
-            try {
-                emit(Resource.Loading())
-                val login = repository.register(user)
-                emit(Resource.Success<RegisterDto>(login))
-            } catch (e: HttpException) {
-                if (e.response() != null) {
-                    if (e.response()?.code()!! in 401..499) {
-                        emit(Resource.Error("Login gagal, cek kembali email atau password"))
+        if (repository.checkInternet()) {
+            if (user.name?.isEmpty()!!) {
+                emit(Resource.Error<RegisterDto>("Nama tidak boleh kosong"))
+            } else if (user.email?.isEmpty()!!) {
+                emit(Resource.Error<RegisterDto>(ERROR_EMAIL_EMPTY))
+            } else if (!validateEmail(email = user.email)) {
+                emit(Resource.Error<RegisterDto>(ERROR_EMAIL_VALID))
+            } else if (user.password?.isEmpty()!!) {
+                emit(Resource.Error<RegisterDto>(ERROR_PASSWORD_EMPTY))
+            } else if (!validatePasswordLength(password = user.password.length)) {
+                emit(Resource.Error<RegisterDto>(ERROR_PASSWORD_LENGTH_VALIDATE))
+            } else {
+                try {
+                    emit(Resource.Loading())
+                    val login = repository.register(user)
+                    emit(Resource.Success<RegisterDto>(login))
+                } catch (e: HttpException) {
+                    if (e.response() != null) {
+                        if (e.response()?.code()!! in 401..499) {
+                            emit(Resource.Error("Login gagal, cek kembali email atau password"))
+                        } else {
+                            emit(Resource.Error(ERROR_MESSAGE))
+                        }
                     } else {
-                        emit(Resource.Error(ERROR_MESSAGE))
-                    }
-                } else {
-                    emit(
-                        Resource.Error<RegisterDto>(
-                            e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+                        emit(
+                            Resource.Error<RegisterDto>(
+                                e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+                            )
                         )
-                    )
+                    }
+                } catch (e: IOException) {
+                    Log.d("UseCase", "invoke: $e")
+                    emit(Resource.Error<RegisterDto>(ERROR_MESSAGE))
                 }
-            } catch (e: IOException) {
-                Log.d("UseCase", "invoke: $e")
-                emit(Resource.Error<RegisterDto>(ERROR_MESSAGE))
             }
+        } else {
+            emit(Resource.Error<RegisterDto>(ERROR_NO_INTERNET_CONNECTION))
         }
-
     }
 }

@@ -13,4 +13,6 @@ interface PaymentRepository {
         bankId: String,
         userBankCode: String
     ): CreateOrderPaymentDto
+
+    suspend fun checkConnection(): Boolean
 }

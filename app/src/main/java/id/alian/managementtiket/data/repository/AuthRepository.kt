@@ -7,4 +7,5 @@ import id.alian.managementtiket.domain.model.User
 interface AuthRepository {
     suspend fun login(email: String, password: String): LoginDto
     suspend fun register(user: User): RegisterDto
+    suspend fun checkInternet(): Boolean
 }

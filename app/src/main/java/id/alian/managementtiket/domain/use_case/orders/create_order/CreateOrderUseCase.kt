@@ -26,23 +26,27 @@ class CreateOrderUseCase @Inject constructor(
         ticketCount: Int,
         price: Int
     ): Flow<Resource<CreateOrderPaymentDto>> = flow {
-        try {
-            emit(Resource.Loading<CreateOrderPaymentDto>())
-            dataStoreUseCase.getToken()?.let {
-                val order = repository.createOrder(
-                    it, ticketId, ticketCount, price
+        if (repository.checkConnection()) {
+            try {
+                emit(Resource.Loading<CreateOrderPaymentDto>())
+                dataStoreUseCase.getToken()?.let {
+                    val order = repository.createOrder(
+                        it, ticketId, ticketCount, price
+                    )
+                    emit(Resource.Success<CreateOrderPaymentDto>(order))
+                }
+            } catch (e: HttpException) {
+                emit(
+                    Resource.Error<CreateOrderPaymentDto>(
+                        e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
+                    )
                 )
-                emit(Resource.Success<CreateOrderPaymentDto>(order))
+            } catch (e: IOException) {
+                Log.d("UseCase", "invoke: $e")
+                emit(Resource.Error<CreateOrderPaymentDto>(ERROR_MESSAGE))
             }
-        } catch (e: HttpException) {
-            emit(
-                Resource.Error<CreateOrderPaymentDto>(
-                    e.localizedMessage ?: UNEXPECTED_ERROR_MESSAGE
-                )
-            )
-        } catch (e: IOException) {
-            Log.d("UseCase", "invoke: $e")
-            emit(Resource.Error<CreateOrderPaymentDto>(ERROR_MESSAGE))
+        } else {
+            emit(Resource.Error<CreateOrderPaymentDto>(ERROR_NO_INTERNET_CONNECTION))
         }
     }
 }

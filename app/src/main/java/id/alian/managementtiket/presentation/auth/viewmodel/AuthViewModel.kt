@@ -53,9 +53,9 @@ class AuthViewModel @Inject constructor(
                 else -> Unit
             }
         }.launchIn(viewModelScope)
-        viewModelScope.launch {
-            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
-        }
+//        viewModelScope.launch {
+//            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
+//        }
     }
 
     fun register(user: User) {
@@ -71,8 +71,8 @@ class AuthViewModel @Inject constructor(
                 else -> Unit
             }
         }.launchIn(viewModelScope)
-        viewModelScope.launch {
-            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
-        }
+//        viewModelScope.launch {
+//            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
+//        }
     }
 }

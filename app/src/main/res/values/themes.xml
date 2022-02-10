@@ -16,4 +16,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="button_theme_green" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:colorAccent">@color/success</item>
+    </style>
 </resources>

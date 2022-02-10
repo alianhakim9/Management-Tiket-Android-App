@@ -14,4 +14,5 @@ interface OrderRepository {
     ): CreateOrderPaymentDto
 
     suspend fun orderDetail(token: String, orderId: Int): OrderDetailDto
+    suspend fun checkConnection(): Boolean
 }

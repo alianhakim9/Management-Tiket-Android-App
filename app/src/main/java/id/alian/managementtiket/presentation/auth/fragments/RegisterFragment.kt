@@ -26,7 +26,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val spannable = SpannableString("Halaman Register")
         spannable.setSpan(
             ForegroundColorSpan(requireContext().getColorCompat(R.color.success)),
-            0, 7,
+            8, 16,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         titleRegister.text = spannable

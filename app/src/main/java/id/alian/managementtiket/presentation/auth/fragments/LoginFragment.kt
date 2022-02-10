@@ -1,5 +1,6 @@
 package id.alian.managementtiket.presentation.auth.fragments
 
+import android.graphics.Color.WHITE
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.R
 import id.alian.managementtiket.commons.*
+import id.alian.managementtiket.commons.Constants.ERROR_NO_INTERNET_CONNECTION
 import id.alian.managementtiket.databinding.FragmentLoginBinding
 import id.alian.managementtiket.presentation.BaseFragment
 import id.alian.managementtiket.presentation.MainActivity
@@ -28,7 +30,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             val spannable = SpannableString("Halaman Login")
             spannable.setSpan(
                 ForegroundColorSpan(requireContext().getColorCompat(R.color.success)),
-                0, 7,
+                8, 13,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             titleLogin.text = spannable
