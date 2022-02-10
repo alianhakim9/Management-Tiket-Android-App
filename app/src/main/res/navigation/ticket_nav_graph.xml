@@ -25,7 +25,7 @@
         android:id="@+id/listTicketFragment"
         android:name="id.alian.managementtiket.presentation.tickets.fragments.ListTicketFragment"
         android:label="fragment_list_ticket_pagination"
-        tools:layout="@layout/fragment_list_ticket_pagination" >
+        tools:layout="@layout/fragment_list_ticket" >
         <action
             android:id="@+id/action_listTicketPaginationFragment_to_detailTicketFragment"
             app:destination="@id/detailTicketFragment" />

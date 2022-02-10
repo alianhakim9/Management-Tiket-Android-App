@@ -23,6 +23,7 @@ class ListTicketFragment :
         setupRecyclerView()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.tickets.collect {
+                swipeUpRefresh.isRefreshing = false
                 adapter.submitData(it)
             }
         }
