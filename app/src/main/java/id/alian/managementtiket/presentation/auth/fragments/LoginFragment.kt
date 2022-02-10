@@ -22,45 +22,43 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun FragmentLoginBinding.initialize() {
         requireActivity().runOnUiThread {
 
-            with(binding) {
-                etEmail.editText?.addTextChangedListener(loginTextWatcher)
-                etPassword.editText?.addTextChangedListener(loginTextWatcher)
+            etEmail.editText?.addTextChangedListener(loginTextWatcher)
+            etPassword.editText?.addTextChangedListener(loginTextWatcher)
 
-                btnToRegister.setOnClickListener {
-                    findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-                }
+            btnToRegister.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
 
-                btnLogin.setOnClickListener {
-                    viewModel.login(
-                        email = binding.etEmail.editText?.text.toString(),
-                        password = binding.etPassword.editText?.text.toString()
-                    )
-                }
+            btnLogin.setOnClickListener {
+                viewModel.login(
+                    email = binding.etEmail.editText?.text.toString(),
+                    password = binding.etPassword.editText?.text.toString()
+                )
+            }
 
-                viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                    viewModel.login.collectLatest {
-                        when (it) {
-                            is Resource.Loading -> {
-                                showLoading()
-                            }
+            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+                viewModel.login.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
 
-                            is Resource.Success -> {
-                                requireActivity().openActivity(MainActivity::class.java)
-                                requireActivity().finish()
-                            }
+                        is Resource.Success -> {
+                            requireActivity().openActivity(MainActivity::class.java)
+                            requireActivity().finish()
+                        }
 
-                            is Resource.Error -> {
-                                hideLoading()
-                                root.showShortSnackBarWithAction(
-                                    message = it.message!!,
-                                    actionLabel = resources.getString(R.string.snackBar_ok),
-                                    block = { snackBar ->
-                                        snackBar.dismiss()
-                                    },
-                                    colorHex = requireContext().getColorCompat(R.color.error_red),
-                                    actionLabelColor = requireContext().getColorCompat(R.color.white)
-                                )
-                            }
+                        is Resource.Error -> {
+                            hideLoading()
+                            root.showShortSnackBarWithAction(
+                                message = it.message!!,
+                                actionLabel = resources.getString(R.string.snackBar_ok),
+                                block = { snackBar ->
+                                    snackBar.dismiss()
+                                },
+                                colorHex = requireContext().getColorCompat(R.color.error_red),
+                                actionLabelColor = requireContext().getColorCompat(R.color.white)
+                            )
                         }
                     }
                 }

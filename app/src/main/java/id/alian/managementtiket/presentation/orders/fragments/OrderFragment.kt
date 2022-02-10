@@ -26,47 +26,45 @@ class OrderFragment :
         requireActivity().runOnUiThread {
             setupRecyclerView()
 
-            with(binding) {
-                topAppBar.setNavigationOnClickListener {
-                    requireActivity().finish()
-                }
+            topAppBar.setNavigationOnClickListener {
+                requireActivity().finish()
+            }
 
-                orderAdapter.setOnItemClickListener { order ->
-                    requireContext().openActivity(PaymentActivity::class.java, extras = {
-                        putSerializable("order", order)
-                    })
-                }
+            orderAdapter.setOnItemClickListener { order ->
+                requireContext().openActivity(PaymentActivity::class.java, extras = {
+                    putSerializable("order", order)
+                })
+            }
 
-                orderAdapter.detailOrder { order ->
-                    requireContext().openActivity(OrderDetailActivity::class.java, extras = {
-                        putSerializable("order", order)
-                    })
-                }
+            orderAdapter.detailOrder { order ->
+                requireContext().openActivity(OrderDetailActivity::class.java, extras = {
+                    putSerializable("order", order)
+                })
+            }
 
-                swipeUpRefresh.setOnRefreshListener {
-                    viewModel.getOrders()
-                }
+            swipeUpRefresh.setOnRefreshListener {
+                viewModel.getOrders()
+            }
 
-                lifecycleScope.launchWhenStarted {
-                    viewModel.orderListState.collect {
-                        requireActivity().runOnUiThread {
-                            when (it) {
-                                is Resource.Success -> {
-                                    swipeUpRefresh.isRefreshing = false
-                                    linearProgressIndicator.remove()
-                                    orderAdapter.differ.submitList(it.data)
-                                }
-
-                                is Resource.Error -> {
-                                    swipeUpRefresh.isRefreshing = false
-                                    linearProgressIndicator.remove()
-                                    root.showShortSnackBar(
-                                        message = it.message!!,
-                                        colorHex = requireContext().getColorCompat(R.color.error_red)
-                                    )
-                                }
-                                else -> Unit
+            lifecycleScope.launchWhenStarted {
+                viewModel.orderListState.collect {
+                    requireActivity().runOnUiThread {
+                        when (it) {
+                            is Resource.Success -> {
+                                swipeUpRefresh.isRefreshing = false
+                                linearProgressIndicator.remove()
+                                orderAdapter.differ.submitList(it.data)
                             }
+
+                            is Resource.Error -> {
+                                swipeUpRefresh.isRefreshing = false
+                                linearProgressIndicator.remove()
+                                root.showShortSnackBar(
+                                    message = it.message!!,
+                                    colorHex = requireContext().getColorCompat(R.color.error_red)
+                                )
+                            }
+                            else -> Unit
                         }
                     }
                 }

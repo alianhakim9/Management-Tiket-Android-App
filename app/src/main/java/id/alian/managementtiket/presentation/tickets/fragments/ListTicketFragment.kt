@@ -34,14 +34,20 @@ class ListTicketFragment :
                 )
             )
         }
+
+        topAppBar.setNavigationOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun setupRecyclerView() {
-        binding.rvTicketList.adapter = adapter.withLoadStateFooter(
-            footer = TicketLoadStateAdapter {
-                adapter.retry()
-            }
-        )
-        binding.rvTicketList.layoutManager = LinearLayoutManager(requireContext())
+        with(binding) {
+            rvTicketList.adapter = adapter.withLoadStateFooter(
+                footer = TicketLoadStateAdapter {
+                    adapter.retry()
+                }
+            )
+            rvTicketList.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 }

@@ -56,8 +56,8 @@ class TicketAdapter : RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
             tvTicketFrom.text = "Dari : ${tickets.from}"
             tvTicketTo.text = "Tujuan : ${tickets.to}"
             tvTicketTime.text = "Waktu Keberangkatan : ${tickets.time}"
-            tvTicketPrice.text = "Harga Tiket : Rp. ${tickets.price}"
-            tvTicketStock.text = "Stok Tiket : ${tickets.ticket_stock}"
+            tvTicketPrice.text = "Rp. ${tickets.price}"
+            tvTicketStock.text = "Stok : ${tickets.ticket_stock}"
         }
     }
 

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.alian.managementtiket.commons.Resource
@@ -53,6 +54,13 @@ class SearchTicketFragment :
                         }
                     }
                 }
+            }
+            adapter.setOnItemClickListener {
+                findNavController().navigate(
+                    SearchTicketFragmentDirections.actionSearchTicketFragmentToDetailTicketFragment(
+                        it
+                    )
+                )
             }
         }
     }

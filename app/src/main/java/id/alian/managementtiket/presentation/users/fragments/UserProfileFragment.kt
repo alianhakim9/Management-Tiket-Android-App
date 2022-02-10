@@ -23,16 +23,15 @@ class UserProfileFragment :
             viewModel.userState.collect {
                 when (it) {
                     is Resource.Loading -> {
-                        binding.tvUserName.text = "Loading..."
+                        tvUserName.text = "Loading..."
                     }
 
                     is Resource.Success -> {
-                        binding.tvUserName.text = "Hello ${it.data?.name}"
+                        tvUserName.text = "Hello ${it.data?.name}"
                     }
                     is Resource.Error -> {
-                        binding.tvUserName.text = "Error!"
+                        tvUserName.text = "Error!"
                     }
-                    else -> Unit
                 }
             }
         }

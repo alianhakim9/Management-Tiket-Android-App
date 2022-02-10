@@ -20,49 +20,47 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel: AuthViewModel by viewModels()
 
     override fun FragmentRegisterBinding.initialize() {
-        with(binding) {
-            etName.editText?.addTextChangedListener(registerTextWatcher)
-            etEmail.editText?.addTextChangedListener(registerTextWatcher)
-            etPassword.editText?.addTextChangedListener(registerTextWatcher)
+        etName.editText?.addTextChangedListener(registerTextWatcher)
+        etEmail.editText?.addTextChangedListener(registerTextWatcher)
+        etPassword.editText?.addTextChangedListener(registerTextWatcher)
 
-            btnRegister.setOnClickListener {
-                viewModel.register(
-                    User(
-                        email = etEmail.editText?.text.toString(),
-                        name = etName.editText?.text.toString(),
-                        password = etPassword.editText?.text.toString()
-                    )
+        btnRegister.setOnClickListener {
+            viewModel.register(
+                User(
+                    email = etEmail.editText?.text.toString(),
+                    name = etName.editText?.text.toString(),
+                    password = etPassword.editText?.text.toString()
                 )
-            }
+            )
+        }
 
-            btnToLogin.setOnClickListener {
-                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
-            }
+        btnToLogin.setOnClickListener {
+            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+        }
 
-            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                viewModel.registerState.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            showLoading()
-                        }
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.registerState.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
 
-                        is Resource.Success -> {
-                            requireContext().openActivity(MainActivity::class.java)
-                            requireActivity().finish()
-                        }
+                    is Resource.Success -> {
+                        requireContext().openActivity(MainActivity::class.java)
+                        requireActivity().finish()
+                    }
 
-                        is Resource.Error -> {
-                            hideLoading()
-                            root.showShortSnackBarWithAction(
-                                message = it.message!!,
-                                actionLabel = resources.getString(R.string.snackBar_ok),
-                                block = { snackBar ->
-                                    snackBar.dismiss()
-                                },
-                                colorHex = requireContext().getColorCompat(R.color.error_red),
-                                actionLabelColor = requireContext().getColorCompat(R.color.white)
-                            )
-                        }
+                    is Resource.Error -> {
+                        hideLoading()
+                        root.showShortSnackBarWithAction(
+                            message = it.message!!,
+                            actionLabel = resources.getString(R.string.snackBar_ok),
+                            block = { snackBar ->
+                                snackBar.dismiss()
+                            },
+                            colorHex = requireContext().getColorCompat(R.color.error_red),
+                            actionLabelColor = requireContext().getColorCompat(R.color.white)
+                        )
                     }
                 }
             }

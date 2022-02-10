@@ -20,7 +20,7 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIcon="@drawable/ic_close"
             app:title="Detail Tiket" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -58,7 +58,7 @@
         android:text="@string/label_dummy_price"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_ticket_stock"
         app:layout_constraintTop_toTopOf="@+id/tv_ticket_from" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#757575"
+        android:background="#A5A5A5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
