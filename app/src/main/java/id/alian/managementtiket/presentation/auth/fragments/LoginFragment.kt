@@ -33,8 +33,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             )
             titleLogin.text = spannable
 
-            etEmail.editText?.addTextChangedListener(loginTextWatcher)
-            etPassword.editText?.addTextChangedListener(loginTextWatcher)
+            with(loginTextWatcher) {
+                etEmail.editText?.addTextChangedListener(this)
+                etPassword.editText?.addTextChangedListener(this)
+            }
 
             btnToRegister.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -47,29 +49,33 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 )
             }
 
-            viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-                viewModel.login.collectLatest {
-                    when (it) {
-                        is Resource.Loading -> {
-                            showLoading()
-                        }
+            with(viewLifecycleOwner) {
+                lifecycleScope.launchWhenCreated {
+                    with(viewModel) {
+                        login.collectLatest {
+                            when (it) {
+                                is Resource.Loading -> {
+                                    showLoading()
+                                }
 
-                        is Resource.Success -> {
-                            requireActivity().openActivity(MainActivity::class.java)
-                            requireActivity().finish()
-                        }
+                                is Resource.Success -> {
+                                    requireActivity().openActivity(MainActivity::class.java)
+                                    requireActivity().finish()
+                                }
 
-                        is Resource.Error -> {
-                            hideLoading()
-                            root.showShortSnackBarWithAction(
-                                message = it.message!!,
-                                actionLabel = resources.getString(R.string.snackBar_ok),
-                                block = { snackBar ->
-                                    snackBar.dismiss()
-                                },
-                                colorHex = requireContext().getColorCompat(R.color.error_red),
-                                actionLabelColor = requireContext().getColorCompat(R.color.white)
-                            )
+                                is Resource.Error -> {
+                                    hideLoading()
+                                    root.showShortSnackBarWithAction(
+                                        message = it.message!!,
+                                        actionLabel = resources.getString(R.string.snackBar_ok),
+                                        block = { snackBar ->
+                                            snackBar.dismiss()
+                                        },
+                                        colorHex = requireContext().getColorCompat(R.color.error_red),
+                                        actionLabelColor = requireContext().getColorCompat(R.color.white)
+                                    )
+                                }
+                            }
                         }
                     }
                 }

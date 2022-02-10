@@ -26,7 +26,6 @@
 
     <EditText
         android:id="@+id/et_from_filter"
-        style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_from"
@@ -42,7 +41,6 @@
 
     <EditText
         android:id="@+id/et_to_filter"
-        style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_to"

@@ -1,7 +1,6 @@
 package id.alian.managementtiket.domain.use_case.users.get_profile
 
 import android.util.Log
-import id.alian.managementtiket.commons.Constants
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
@@ -17,9 +16,8 @@ import javax.inject.Inject
 
 class GetProfileUseCase @Inject constructor(
     private val repository: UserRepository,
-    private val dataStoreUseCase: DataStoreUseCase
+    private val dataStoreUseCase: DataStoreUseCase,
 ) {
-
     operator fun invoke(): Flow<Resource<User>> = flow {
         try {
             emit(Resource.Loading<User>())

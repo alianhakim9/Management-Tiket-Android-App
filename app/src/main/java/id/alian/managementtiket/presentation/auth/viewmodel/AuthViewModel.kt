@@ -1,9 +1,16 @@
 package id.alian.managementtiket.presentation.auth.viewmodel
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import id.alian.managementtiket.commons.Constants
+import id.alian.managementtiket.commons.Constants.ERROR_NO_INTERNET_CONNECTION
 import id.alian.managementtiket.commons.Resource
+import id.alian.managementtiket.commons.isNetworkAvailable
 import id.alian.managementtiket.data.remote.dto.auth.LoginDto
 import id.alian.managementtiket.data.remote.dto.auth.RegisterDto
 import id.alian.managementtiket.domain.model.User
@@ -14,6 +21,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +37,9 @@ class AuthViewModel @Inject constructor(
     private val _registerState = MutableSharedFlow<Resource<RegisterDto>>()
     val registerState: SharedFlow<Resource<RegisterDto>> = _registerState
 
+    private val _noInternet = MutableSharedFlow<String>()
+    val noInternet: SharedFlow<String> = _noInternet
+
     fun login(email: String, password: String) {
         loginUseCase(email, password).onEach { result ->
             _login.emit(result)
@@ -42,6 +53,9 @@ class AuthViewModel @Inject constructor(
                 else -> Unit
             }
         }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
+        }
     }
 
     fun register(user: User) {
@@ -57,5 +71,8 @@ class AuthViewModel @Inject constructor(
                 else -> Unit
             }
         }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            _noInternet.emit(ERROR_NO_INTERNET_CONNECTION)
+        }
     }
 }

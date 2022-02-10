@@ -2,7 +2,6 @@ package id.alian.managementtiket.presentation.orders.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color.GREEN
 import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -51,7 +50,7 @@ class OrderAdapter @Inject constructor(
             tvTicketFrom.text = "Dari : ${orders.ticket.from}"
             tvTicketTo.text = "Tujuan : ${orders.ticket.to}"
             tvTicketTime.text = "Waktu Keberangkatan : ${orders.ticket.time}"
-            tvTicketPrice.text = "Harga Tiket : Rp ${orders.price}"
+            tvTicketPrice.text = "Rp : ${orders.price}"
             tvTicketCount.text = "Jumlah Tiket : ${orders.ticket_count}"
 
             if (orders.status != "0") {

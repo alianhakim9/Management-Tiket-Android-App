@@ -1,10 +1,13 @@
 package id.alian.managementtiket.domain.use_case.orders.create_order
 
+import android.content.Context
 import android.util.Log
 import id.alian.managementtiket.commons.Constants
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
+import id.alian.managementtiket.commons.Constants.ERROR_NO_INTERNET_CONNECTION
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
+import id.alian.managementtiket.commons.isNetworkAvailable
 import id.alian.managementtiket.data.remote.dto.order.CreateOrderPaymentDto
 import id.alian.managementtiket.data.repository.OrderRepository
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
@@ -16,14 +19,14 @@ import javax.inject.Inject
 
 class CreateOrderUseCase @Inject constructor(
     private val repository: OrderRepository,
-    private val dataStoreUseCase: DataStoreUseCase
+    private val dataStoreUseCase: DataStoreUseCase,
 ) {
     operator fun invoke(
         ticketId: Int,
         ticketCount: Int,
         price: Int
     ): Flow<Resource<CreateOrderPaymentDto>> = flow {
-        val unit = try {
+        try {
             emit(Resource.Loading<CreateOrderPaymentDto>())
             dataStoreUseCase.getToken()?.let {
                 val order = repository.createOrder(

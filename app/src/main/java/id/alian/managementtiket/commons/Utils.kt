@@ -3,6 +3,9 @@ package id.alian.managementtiket.commons
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -131,13 +134,29 @@ fun <T> Context.openActivity(it: Class<T>, extras: Bundle.() -> Unit = {}) {
 // color
 fun Context.getColorCompat(id: Int) = ContextCompat.getColor(this, id)
 
-fun <T : Throwable> (() -> Unit).catch(
-    vararg exceptions: KClass<out T>,
-    catchBlock: (Throwable) -> Unit
-) {
-    try {
-        this()
-    } catch (e: Throwable) {
-        if (e::class in exceptions) catchBlock(e) else throw e
+// check internet connection
+fun Context.isNetworkAvailable(): Boolean {
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        if (capabilities != null) {
+            when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                    return true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                    return true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                    return true
+                }
+            }
+        }
+    } else {
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
+            return true
+        }
     }
+    return false
 }

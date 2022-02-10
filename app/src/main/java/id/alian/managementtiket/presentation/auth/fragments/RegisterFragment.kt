@@ -49,29 +49,33 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.registerState.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
+        with(viewLifecycleOwner) {
+            with(viewModel) {
+                lifecycleScope.launchWhenCreated {
+                    registerState.collectLatest {
+                        when (it) {
+                            is Resource.Loading -> {
+                                showLoading()
+                            }
 
-                    is Resource.Success -> {
-                        requireContext().openActivity(MainActivity::class.java)
-                        requireActivity().finish()
-                    }
+                            is Resource.Success -> {
+                                requireContext().openActivity(MainActivity::class.java)
+                                requireActivity().finish()
+                            }
 
-                    is Resource.Error -> {
-                        hideLoading()
-                        root.showShortSnackBarWithAction(
-                            message = it.message!!,
-                            actionLabel = resources.getString(R.string.snackBar_ok),
-                            block = { snackBar ->
-                                snackBar.dismiss()
-                            },
-                            colorHex = requireContext().getColorCompat(R.color.error_red),
-                            actionLabelColor = requireContext().getColorCompat(R.color.white)
-                        )
+                            is Resource.Error -> {
+                                hideLoading()
+                                root.showShortSnackBarWithAction(
+                                    message = it.message!!,
+                                    actionLabel = resources.getString(R.string.snackBar_ok),
+                                    block = { snackBar ->
+                                        snackBar.dismiss()
+                                    },
+                                    colorHex = requireContext().getColorCompat(R.color.error_red),
+                                    actionLabelColor = requireContext().getColorCompat(R.color.white)
+                                )
+                            }
+                        }
                     }
                 }
             }

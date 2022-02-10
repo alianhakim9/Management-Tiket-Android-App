@@ -1,13 +1,12 @@
 package id.alian.managementtiket.domain.use_case.orders.get_orders
 
 import android.util.Log
-import id.alian.managementtiket.commons.Constants
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
 import id.alian.managementtiket.data.remote.dto.order.toOrder
-import id.alian.managementtiket.domain.model.Order
 import id.alian.managementtiket.data.repository.OrderRepository
+import id.alian.managementtiket.domain.model.Order
 import id.alian.managementtiket.domain.use_case.preferences.DataStoreUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,8 +15,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetOrderUseCase @Inject constructor(
-    val repository: OrderRepository,
-    private val dataStoreUseCase: DataStoreUseCase
+    private val repository: OrderRepository,
+    private val dataStoreUseCase: DataStoreUseCase,
 ) {
     operator fun invoke(): Flow<Resource<List<Order>>> = flow {
         try {

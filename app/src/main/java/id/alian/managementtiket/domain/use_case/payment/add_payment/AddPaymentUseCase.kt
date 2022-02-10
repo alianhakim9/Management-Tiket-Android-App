@@ -1,7 +1,6 @@
 package id.alian.managementtiket.domain.use_case.payment.add_payment
 
 import android.util.Log
-import id.alian.managementtiket.commons.Constants
 import id.alian.managementtiket.commons.Constants.ERROR_MESSAGE
 import id.alian.managementtiket.commons.Constants.UNEXPECTED_ERROR_MESSAGE
 import id.alian.managementtiket.commons.Resource
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 class AddPaymentUseCase @Inject constructor(
     private val repository: PaymentRepository,
-    private val dataStoreUseCase: DataStoreUseCase
+    private val dataStoreUseCase: DataStoreUseCase,
 ) {
     operator fun invoke(
         orderId: Int,
