@@ -14,11 +14,12 @@
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_detail_ticket.xml" value="0.33" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_list_ticket.xml" value="0.33" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_list_user.xml" value="0.371875" />
-        <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_order.xml" value="0.30512820512820515" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_order_dashboard.xml" value="0.30512820512820515" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_payment.xml" value="0.30512820512820515" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_register.xml" value="0.33" />
+        <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_search_ticket.xml" value="0.30512820512820515" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_ticket_dashboard.xml" value="0.371875" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_ticket_list.xml" value="0.371875" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/fragment_user_dashboard.xml" value="0.22" />
@@ -30,32 +31,13 @@
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/layout/user_item_layout.xml" value="0.371875" />
         <entry key="..\:/Users/alian/AndroidStudioProjects/ManagementTiket/app/src/main/res/menu/dashboard_menu.xml" value="0.30512820512820515" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_auth.xml" value="0.2" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_order.xml" value="0.125" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_order_detail.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_payment.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_ticket.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_user.xml" value="0.125" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/dropdown_list_item.xml" value="0.125" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_detail_ticket.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_list_ticket.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_list_ticket_pagination.xml" value="0.25" />
+        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/activity_payment.xml" value="0.25" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_order.xml" value="0.25" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_order_detail.xml" value="0.1" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_payment.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_register.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_search_ticket.xml" value="0.264" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_ticket_dashboard.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_user_dashboard.xml" value="0.125" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/fragment_user_profile.xml" value="0.125" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/header_navigation_drawer.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/item_loading_state.xml" value="0.264" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/item_order_layout.xml" value="0.2101851851851852" />
         <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/layout/item_ticket_layout.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/menu/dashboard_menu.xml" value="0.1" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/menu/main_menu.xml" value="0.25" />
-        <entry key="..\:/data ali/development/android-projects/management-tiket/app/src/main/res/menu/ticket_bottom_navigation_menu.xml" value="0.3625" />
       </map>
     </option>
   </component>

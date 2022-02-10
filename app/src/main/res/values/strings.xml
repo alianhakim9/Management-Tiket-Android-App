@@ -15,7 +15,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="title_login_page">Halaman Login</string>
-    <string name="title_register_page">Halaman Register</string>
+    <string name="title_register_page">Halaman Pendaftaran</string>
     <string name="err_message">Gagal</string>
     <string name="img_content_desc">Image</string>
     <string name="header_title">Header Title</string>

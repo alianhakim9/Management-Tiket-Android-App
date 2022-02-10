@@ -1,7 +1,10 @@
 package id.alian.managementtiket.presentation.auth.fragments
 
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,6 +24,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun FragmentLoginBinding.initialize() {
         requireActivity().runOnUiThread {
+
+            val spannable = SpannableString("Halaman Login")
+            spannable.setSpan(
+                ForegroundColorSpan(requireContext().getColorCompat(R.color.success)),
+                0, 7,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            titleLogin.text = spannable
 
             etEmail.editText?.addTextChangedListener(loginTextWatcher)
             etPassword.editText?.addTextChangedListener(loginTextWatcher)

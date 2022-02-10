@@ -1,7 +1,10 @@
 package id.alian.managementtiket.presentation.auth.fragments
 
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,6 +23,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     private val viewModel: AuthViewModel by viewModels()
 
     override fun FragmentRegisterBinding.initialize() {
+        val spannable = SpannableString("Halaman Register")
+        spannable.setSpan(
+            ForegroundColorSpan(requireContext().getColorCompat(R.color.success)),
+            0, 7,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        titleRegister.text = spannable
+
         etName.editText?.addTextChangedListener(registerTextWatcher)
         etEmail.editText?.addTextChangedListener(registerTextWatcher)
         etPassword.editText?.addTextChangedListener(registerTextWatcher)
